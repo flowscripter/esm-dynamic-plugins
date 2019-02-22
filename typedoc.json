@@ -1,0 +1,10 @@
+{
+    "target": "es6",
+    "mode": "modules",
+    "out": "docs",
+    "theme": "minimal",
+    "ignoreCompilerErrors": "false",
+    "preserveConstEnums": "true",
+    "hideGenerator": "true",
+    "readme": "none"
+}

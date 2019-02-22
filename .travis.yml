@@ -1,0 +1,45 @@
+language: node_js
+node_js: '11'
+branches:
+  only:
+  - master
+notifications:
+  slack:
+    rooms:
+      - secure: bX2ka67CpsF0ZXTDRob+PLEyiK+ldB7/ipanK4/Vrzg60JdZR/LtSDTKqrrERk10X5c+E8MVbdozGIPAmESmoKEgx2ARUFt/HRmAfNcTTXKTzrscVgDFN0XHdDI0IlPC2BsylbXUzNF90XThPTtKyDmMKjFEtPEgLeQ222hgGg39+G1H1De03vSKxJvlOOTSCJ4ThrobWPw37bubsl/iMQE3xEHTebUvniZRjgeZnCUrx0duPafSb37u/63t7w6ZLZ1qz0WzXvgFyP5RHFqyGS6Q7Be/fOhTe52nyREXLkVQjy7WbdftvilnGAjRV8jDmtPttiNI3WYhc7F8Vt8zZKfm32lo/IKwjXjaq0TD2LaRHNrfBpsgwcwu7EXKd+5bNc3pq+sW9XH6QbEzcKUxgHd0PMAINJcvYZt1U0ugOYDK9qtma+neF97UDGI0uXSbTRsq6vOZ70l3RWrhTHplflKNkge5asA2BrJsqW5Jrrvw3SvI+JmPny9RgkB8+md4o8BnnxzlL+i4VQblGuy68t4y0Ee36dJUS3xsB3uiB+lGdATXaR4XxXJL/MxSAr0AFrjY9uUowiRz3vRpEx6EqIauagB7JXSRm9tHhDmIVd++kJdVeQN89wPntIKmf0wFqqnNsD8pob1T+sb/2v7Yv9zTuCoYrow2NuuKQr6W/eE=
+    on_failure: always
+    on_success: change
+stages:
+- name: test
+- name: analysis
+- name: release
+  if: branch = master AND type != pull_request
+jobs:
+  include:
+  - stage: test
+    script: npm test
+    name: test
+  - script: npm run lint
+    name: lint
+  - stage: analysis
+    script: npm test -- --coverage && npm run lint -- -f json -o reports/eslint.json && npx gulp sonar
+    name: sonar
+    addons:
+      sonarcloud:
+        organization: flowscripter
+        token:
+          secure: "$SONAR_TOKEN"
+  - stage: release
+    script: npm run docs && touch docs/.nojekyll
+    deploy:
+      - provider: script
+        skip_cleanup: true
+        script: npx semantic-release
+      - provider: pages
+        skip-cleanup: true
+        local-dir: "docs"
+        github-token: $GH_TOKEN
+cache:
+  npm: true
+  directories:
+    - /home/travis/.sonar

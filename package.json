@@ -1,0 +1,86 @@
+{
+    "name": "@flowscripter/esm-dynamic-plugins",
+    "version": "0.0.0",
+    "description": "Plugin framework using ES Modules and Dynamic Import.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/flowscripter/esm-dynamic-plugins"
+    },
+    "homepage": "https://github.com/flowscripter/esm-dynamic-plugins",
+    "bugs": {
+        "url": "https://github.com/flowscripter/esm-dynamic-plugins/issues"
+    },
+    "keywords": [
+        "typescript",
+        "module",
+        "extension",
+        "dynamic",
+        "plugin",
+        "framework"
+    ],
+    "contributors": [
+        {
+            "name": "Vectronic",
+            "email": "hello.vectronic@gmail.com",
+            "url": "https://vectronic.io"
+        }
+    ],
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "main": "dist/index.mjs",
+    "module": "dist/index.mjs",
+    "files": [
+        "dist"
+    ],
+    "typings": "dist/types/index.d.ts",
+    "engines": {
+        "node": ">=10.15.1"
+    },
+    "scripts": {
+        "prebuild": "npx rimraf dist",
+        "build": "npx rollup -c",
+        "watch": "npx rollup -c --watch",
+        "test": "npx jest",
+        "lint": "npx eslint ./src/** ./test/**",
+        "docs": "npx typedoc src"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "7.5.2",
+        "@commitlint/config-conventional": "7.5.0",
+        "@flowscripter/eslint-config": "1.1.3",
+        "@flowscripter/tsconfig": "1.0.3",
+        "@types/debug": "4.1.1",
+        "@types/jest": "24.0.6",
+        "@typescript-eslint/eslint-plugin": "1.4.0",
+        "@typescript-eslint/parser": "1.4.0",
+        "eslint": "5.14.1",
+        "eslint-plugin-import": "2.16.0",
+        "eslint-plugin-jest": "22.3.0",
+        "gulp": "4.0.0",
+        "husky": "1.3.1",
+        "jest": "24.1.0",
+        "rimraf": "2.6.3",
+        "rollup": "1.2.2",
+        "rollup-plugin-cleanup": "3.1.1",
+        "rollup-plugin-commonjs": "9.2.0",
+        "rollup-plugin-eslint": "5.0.0",
+        "rollup-plugin-json": "3.1.0",
+        "rollup-plugin-node-resolve": "4.0.1",
+        "rollup-plugin-peer-deps-external": "2.2.0",
+        "rollup-plugin-typescript2": "0.19.2",
+        "rollup-watch": "4.3.1",
+        "semantic-release": "15.13.3",
+        "sonarqube-scanner": "2.3.0",
+        "temp-dir": "1.0.0",
+        "ts-jest": "24.0.0",
+        "typedoc": "0.14.2",
+        "typedoc-plugin-external-module-name": "2.0.0",
+        "typescript": "3.3.3333"
+    },
+    "peerDependencies": {
+        "debug": "^4.1.1"
+    },
+    "dependencies": {}
+}
