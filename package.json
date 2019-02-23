@@ -72,7 +72,7 @@
         "rollup-plugin-typescript2": "0.19.2",
         "rollup-watch": "4.3.1",
         "semantic-release": "15.13.3",
-        "sonarqube-scanner": "2.3.0",
+        "sonarqube-scanner": "2.4.0",
         "temp-dir": "1.0.0",
         "ts-jest": "24.0.0",
         "typedoc": "0.14.2",
