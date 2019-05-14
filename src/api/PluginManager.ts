@@ -47,7 +47,4 @@ export default interface PluginManager {
      * @return an Extension Point instance implemented by the specified Extension
      */
     instantiate<EP, E extends EP>(Extension: Class<E>): EP;
-
-// see https://github.com/typescript-eslint/typescript-eslint/issues/123
-// eslint-disable-next-line semi
 }

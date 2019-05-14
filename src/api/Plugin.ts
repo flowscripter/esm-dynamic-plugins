@@ -17,7 +17,4 @@ export default interface Plugin {
      * @return the details for the [[Plugin]]
      */
     getPluginDetails(): PluginDetails;
-
-// see https://github.com/typescript-eslint/typescript-eslint/issues/123
-// eslint-disable-next-line semi
 }

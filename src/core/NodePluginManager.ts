@@ -50,7 +50,4 @@ export default class NodePluginManager implements PluginManager {
         const i = this.plugins.length; // eslint-disable-line @typescript-eslint/no-unused-vars
         return new Extension();
     }
-
-// see https://github.com/typescript-eslint/typescript-eslint/issues/123
-// eslint-disable-next-line semi
 }

@@ -35,7 +35,4 @@ export default interface PluginDetails {
      * @return a map of arrays of Extensions by Extension Points implemented by the [[Plugin]]
      */
     getExtensionsByExtensionPoints<EP, E extends EP>(): Map<EP, E[]>;
-
-// see https://github.com/typescript-eslint/typescript-eslint/issues/123
-// eslint-disable-next-line semi
 }
