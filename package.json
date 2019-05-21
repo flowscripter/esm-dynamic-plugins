@@ -44,7 +44,7 @@
         "watch": "npx rollup -c --watch",
         "test": "npx jest",
         "lint": "npx eslint ./src/**/*.ts ./test/**/*.ts",
-        "docs": "npx typedoc src"
+        "docs": "npx typedoc --moduleResolution node src"
     },
     "devDependencies": {
         "@commitlint/cli": "7.6.1",
@@ -71,7 +71,7 @@
         "rollup-plugin-peer-deps-external": "2.2.0",
         "rollup-plugin-typescript2": "0.21.1",
         "rollup-watch": "4.3.1",
-        "semantic-release": "^15.13.14",
+        "semantic-release": "15.13.14",
         "sonarqube-scanner": "2.4.0",
         "temp-dir": "2.0.0",
         "ts-jest": "24.0.2",
