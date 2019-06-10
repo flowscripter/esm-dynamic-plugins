@@ -30,7 +30,7 @@ jobs:
         token:
           secure: "$SONAR_TOKEN"
   - stage: release
-    script: npm run docs && touch docs/.nojekyll
+    script: npm run build && npm run docs && touch docs/.nojekyll
     deploy:
       - provider: script
         skip_cleanup: true
