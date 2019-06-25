@@ -32,7 +32,7 @@
     "main": "dist/index.mjs",
     "module": "dist/index.mjs",
     "files": [
-        "dist"
+        "dist/**/*"
     ],
     "typings": "dist/types/index.d.ts",
     "engines": {
@@ -82,5 +82,7 @@
     "peerDependencies": {
         "debug": "^4.1.1"
     },
-    "dependencies": {}
+    "dependencies": {
+        "lodash": "^4.17.11"
+    }
 }

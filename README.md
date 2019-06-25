@@ -15,9 +15,9 @@ discovered and imported into a running Javascript process.
 #### Key Features 
 
 * Isomorphic support for both NodeJS and browser Javascript runtimes
-* Implemented as a lightweight basic framework, with most functionality implemented as core plugins
+* Implemented as a lightweight basic framework, with further functionality implemented as core plugins
 * Pluggable implementations for deployment, installation and scanning of plugins 
-* Dynamic plugin import implemented via [Javascript dynamic import](https://github.com/tc39/proposal-dynamic-import)
+* Dynamic plugin import using [Javascript dynamic import](https://github.com/tc39/proposal-dynamic-import)
 * ES2015 module based
 * Written in Typescript
 
@@ -25,27 +25,27 @@ discovered and imported into a running Javascript process.
 
 The framework's key concepts are borrowed from the Eclipse Project's extension framework. The key concepts are:
  
-* *ExtensionPoints* are defined by *Interfaces* available to a *HostApplication*
-* A *Plugin* implements one or more *Extensions* for one or more *ExtensionPoints*
-* A *HostApplication* uses a *PluginManager* to scan for and register available *Plugins*
-* A *HostApplication* uses a *PluginManager* to query for and instantiate *ExtensionPoints*
+* *ExtensionPoints* are declared in an *ExtensionPointRegister* by a *HostApplication*
+* A *Plugin* provides one or more *Extensions* for one or more *ExtensionPoints*
+* A *Plugin* provides *ExtensionDetails* for each *Extension* it provides
+* A *HostApplication* declares an *ExtensionPointRegister* and provides it to a *PluginManager*
+* A *PluginManager* registers available *Plugins* which provide *Extensions* for the declared *ExtensionPoints*
+* A *HostApplication* uses the *PluginManager* to query for and select an *Extension* for a desired *ExtensionPoint*
+* The *PluginManager* uses an *ExtensionFactory* provided by an *ExtensionDetails* to instantiate a selected *Extension* 
 
 The following high level class diagram illustrates these relationships:
 
 ![High Level Class Diagram](images/high_level_class_diagram.png "High Level Class Diagram")
 
-The following sequence diagram illustrates the key steps for a *HostApplication* to use a *PluginManager* for both:
+The following sequence diagram illustrates the key steps for a *HostApplication* to use a *PluginManager* for static registration of known *Plugins*: 
 
-* static registration of known *Plugins* 
-* scanning and dynamic registration of discovered *Plugins* 
+![Static Registration Sequence Diagram](images/static_registration_sequence_diagram.png "Static Registration Sequence Diagram")
 
-![Static Registration and Scanning_with_Dynamic Registration Sequence Diagram](images/static_registration_and_scanning_with_dynamic_registration_sequence_diagram.png "Static Registration and Scanning_with_Dynamic Registration Sequence Diagram")
-
-Once scanning and registration have been performed, the *HostApplication* may query for and instantiate *Extensions* for known *ExtensionPoints*:
+Once registration has been performed, the *HostApplication* may query for and instantiate *Extensions* for known *ExtensionPoints*:
 
 [Query and Instantiation Sequence Diagram](images/query_and_instantiation_sequence_diagram.png "Query and Instantiation Sequence Diagram")
 
-For the purposes of testing or validation, as *ExtensionPoints* are simply Javascript classes it also 
+As *ExtensionPoints* are simply Javascript classes, for the purposes of testing or validation, it is 
 possible to bypass the framework altogether and import an *Extension* and use it directly:
  
 [Direct Instantiation Sequence Diagram](images/direct_instantiation_sequence_diagram.png "Direct Instantiation Sequence Diagram")

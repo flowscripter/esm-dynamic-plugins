@@ -10,8 +10,9 @@ import tempDir from 'temp-dir';
 module.exports = {
     input: {
         index: 'src/index.ts',
-        Plugin: 'src/Plugin.ts',
-        PluginManager: 'src/PluginManager.ts'
+        BasePluginManager: 'src/core/BasePluginManager.ts',
+        NodePluginManager: 'src/core/NodePluginManager.ts',
+        BrowserPluginManager: 'src/core/BrowserPluginManager.ts'
     },
     output: {
         dir: 'dist',
@@ -35,6 +36,8 @@ module.exports = {
         }),
         commonjs(),
         resolve(),
-        cleanup({extensions: ['ts']})
+        cleanup({
+            extensions: ['ts']
+        })
     ]
 };

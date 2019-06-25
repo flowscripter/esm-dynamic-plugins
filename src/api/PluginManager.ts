@@ -2,49 +2,65 @@
  * @module @flowscripter/esm-dynamic-plugins
  */
 
-import { Class } from './Class';
+import Plugin from './Plugin';
+import ExtensionDetails from './ExtensionDetails';
 
 /**
- * Used by a host application to scan for and register available [[Plugin]] implementations
- * and to query for and instantiate Extension Points implemented by those modules.
+ * Used by a host application to register [[Plugin]] implementations
+ * and to query for and instantiate Extension Points implemented by those plugins.
+ *
+ * @typeparam EP_ID is the type of the Extension Point IDs used by this plugin manager instance.
+ * @typeparam P_ID is the type of the Plugin IDs used by this plugin manager instance.
  */
-export default interface PluginManager {
+export default interface PluginManager<EP_ID, P_ID> {
 
     /**
-     * [[Plugin]] implementations which have been registered via [[registerPlugin]]
-     */
-    readonly plugins: Plugin[];
-
-    /**
-     * Registers a [[Plugin]] with the [[PluginManager]]
+     * Registers an Extension Point with the [[PluginManager]].
      *
+     * @param extensionPointId the Extension Point to add
+     */
+    registerExtensionPoint(extensionPointId: EP_ID): void;
+
+    /**
+     * Return all registered extension points.
+     *
+     * @return iterable of EP_ID values
+     */
+    getRegisteredExtensionPoints(): Iterable<EP_ID>;
+
+    /**
+     * Registers a [[Plugin]] with the [[PluginManager]].
+     *
+     * @param pluginId a unique identifier under which to register the [[Plugin]]
      * @param plugin the [[Plugin]] implementation to register
-     *
-     * @throws *Error* if the specified [[Plugin]] has already been registered
      */
-    registerPlugin(plugin: Plugin): void;
+    registerPlugin(pluginId: P_ID, plugin: Plugin<EP_ID, P_ID>): void;
 
     /**
-     * Scans for [[Plugin]] implementations and registers any that are discovered via [[registerPlugin]]
+     * Return all registered plugins.
+     *
+     * @return an iterable of tuples [P_ID, [[Plugin]]] for all registered [[Plugin]] implementations
      */
-    scanForPlugins(): void;
+    getRegisteredPlugins(): Iterable<[P_ID, Plugin<EP_ID, P_ID>]>;
 
     /**
-     * Gets all Extensions for the specified Extension Point provided by the currently
-     * registered [[Plugin]] implementations
+     * Gets all [[ExtensionDetails]] for the specified Extension Point ID provided by the currently
+     * registered [[Plugin]] implementations.
      *
-     * @param ExtensionPoint the Extension Point for which to return Extensions
+     * @param extensionPointId the Extension Point ID for which to return Extensions
      *
-     * @return array of tuples [Extension, [[Plugin]]] for the specified Extension Point
+     * @return iterable of tuples [[[ExtensionDetails]], [[Plugin]]] for the specified Extension Point
      */
-    getExtensions<EP, E extends EP>(ExtensionPoint: EP): [E, Plugin][];
+    getExtensions(extensionPointId: EP_ID): Iterable<[ExtensionDetails<EP_ID>, Plugin<EP_ID, P_ID>]>;
 
     /**
-     * Instantiate a specified Extension which extends an Extension Point
+     * Instantiate a specified Extension associated with the specified [[ExtensionDetails]].
      *
-     * @param Extension the Extension to instantiate
+     * @param extensionDetails the [[ExtensionDetails]] for the Extension to instantiate
+     * @param hostData optional data to be passed in to the Extension via an [[ExtensionFactory.create()]] function.
      *
-     * @return an Extension Point instance implemented by the specified Extension
+     * @return an Extension instance implementing the referenced Extension Point
      */
-    instantiate<EP, E extends EP>(Extension: Class<E>): EP;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    instantiate(extensionDetails: ExtensionDetails<EP_ID>, hostData?: any): any;
 }
