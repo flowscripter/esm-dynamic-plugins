@@ -71,7 +71,7 @@
         "rollup-plugin-peer-deps-external": "2.2.0",
         "rollup-plugin-typescript2": "0.21.2",
         "rollup-watch": "4.3.1",
-        "semantic-release": "15.13.17",
+        "semantic-release": "15.13.18",
         "sonarqube-scanner": "2.5.0",
         "temp-dir": "2.0.0",
         "ts-jest": "24.0.2",
