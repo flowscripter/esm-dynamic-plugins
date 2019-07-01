@@ -43,12 +43,12 @@ The following sequence diagram illustrates the key steps for a *HostApplication*
 
 Once registration has been performed, the *HostApplication* may query for and instantiate *Extensions* for known *ExtensionPoints*:
 
-[Query and Instantiation Sequence Diagram](images/query_and_instantiation_sequence_diagram.png "Query and Instantiation Sequence Diagram")
+![Query and Instantiation Sequence Diagram](images/query_and_instantiation_sequence_diagram.png "Query and Instantiation Sequence Diagram")
 
 As *ExtensionPoints* are simply Javascript classes, for the purposes of testing or validation, it is 
 possible to bypass the framework altogether and import an *Extension* and use it directly:
  
-[Direct Instantiation Sequence Diagram](images/direct_instantiation_sequence_diagram.png "Direct Instantiation Sequence Diagram")
+![Direct Instantiation Sequence Diagram](images/direct_instantiation_sequence_diagram.png "Direct Instantiation Sequence Diagram")
 
 #### NO LEGACY SUPPORT
 
