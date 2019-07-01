@@ -2,45 +2,45 @@
  * @module @flowscripter/esm-dynamic-plugins
  */
 
-import ExtensionDetails from '../api/ExtensionDetails';
+import ExtensionDescriptor from '../api/ExtensionDescriptor';
 
 /**
  * Provides a mechanism to register extensions.
  *
- * @typeparam P_ID is the type of the Plugin IDs used by this plugin manager instance.
+ * @typeparam P_ID is the type of the Plugin IDs used in this registry.
  * @typeparam EP_ID is the type of the Extension Point IDs used in this registry.
- * @typeparam E_H is the type of the Extension Handles used by this plugin manager instance.
+ * @typeparam E_H is the type of the Extension Handles used in this registry.
  */
 export default interface ExtensionRegistry<P_ID, EP_ID, E_H> {
 
     /**
-     * Register a specified [[ExtensionDetails]] under a specified Extension ID.
+     * Register a specified [[ExtensionDescriptor]] under a specified Extension ID.
      *
-     * @param extensionHandle a unique identifier under which to register the [[ExtensionDetails]]
-     * @param pluginId the ID of the [[Plugin]] providing this Extension implementation
-     * @param extensionDetails the [[ExtensionDetails]] implementation to register
+     * @param extensionHandle a unique identifier under which to register the [[ExtensionDescriptor]]
+     * @param pluginId the ID of the [[Plugin]] providing this Extension
+     * @param extensionDescriptor the [[ExtensionDescriptor]] for the Extension to register
      */
-    register(extensionHandle: E_H, pluginId: P_ID, extensionDetails: ExtensionDetails<EP_ID>): void;
+    register(extensionHandle: E_H, pluginId: P_ID, extensionDescriptor: ExtensionDescriptor<EP_ID>): void;
 
     /**
-     * Return all registered [[ExtensionDetails]] instances.
+     * Return all registered [[ExtensionDescriptor]] instances.
      *
-     * @return an iterable of tuples [E_H, P_ID, [[ExtensionDetails]]] for all registered [[ExtensionDetails]]
+     * @return an iterable of tuples [E_H, P_ID, [[ExtensionDescriptor]]] for all registered [[ExtensionDescriptor]]
      * instances
      */
-    getAll(): Iterable<[E_H, P_ID, ExtensionDetails<EP_ID>]>;
+    getAll(): Iterable<[E_H, P_ID, ExtensionDescriptor<EP_ID>]>;
 
     /**
-     * Return the specified registered [[ExtensionDetails]] instance.
+     * Return the specified registered [[ExtensionDescriptor]] instance.
      *
-     * @param extensionHandle the handle for the desired [[ExtensionDetails]] instance
+     * @param extensionHandle the handle for the desired [[ExtensionDescriptor]] instance
      *
-     * @return an [[ExtensionDetails]] instance
+     * @return an [[ExtensionDescriptor]] instance
      */
-    get(extensionHandle: E_H): ExtensionDetails<EP_ID>;
+    get(extensionHandle: E_H): ExtensionDescriptor<EP_ID>;
 
     /**
-     * Returns *true* if the [[ExtensionDetails]] identified by the specified Extension Handle has been registered.
+     * Returns *true* if the [[ExtensionDescriptor]] identified by the specified Extension Handle has been registered.
      *
      * @param extensionHandle the extension handle to check
      */
@@ -51,8 +51,8 @@ export default interface ExtensionRegistry<P_ID, EP_ID, E_H> {
      *
      * @param extensionPointId the extension ID to match
      *
-     * @return an iterable of tuples [E_H, P_ID, [[ExtensionDetails]]] for all matching
-     * [[ExtensionDetails]] instances
+     * @return an iterable of tuples [E_H, P_ID, [[ExtensionDescriptor]]] for all matching
+     * [[ExtensionDescriptor]] instances
      */
-    getExtensions(extensionPointId: EP_ID): Iterable<[E_H, P_ID, ExtensionDetails<EP_ID>]>;
+    getExtensions(extensionPointId: EP_ID): Iterable<[E_H, P_ID, ExtensionDescriptor<EP_ID>]>;
 }

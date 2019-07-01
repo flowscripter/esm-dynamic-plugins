@@ -21,7 +21,6 @@ export default class InMemoryExtensionPointRegistry<EP_ID> implements ExtensionP
     public register(extensionPoint: EP_ID): void {
 
         if (this.isRegistered(extensionPoint)) {
-
             throw new Error(`Extension Point ${extensionPoint} already registered`);
         }
         this.extensionPoints.push(extensionPoint);

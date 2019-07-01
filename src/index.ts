@@ -2,7 +2,7 @@
  * @module @flowscripter/esm-dynamic-plugins
  */
 
-export { default as ExtensionDetails } from 'api/ExtensionDetails';
+export { default as ExtensionDescriptor } from 'api/ExtensionDescriptor';
 export { default as ExtensionInfo } from 'api/ExtensionInfo';
 export { default as ExtensionFactory } from 'api/ExtensionFactory';
 export { default as Plugin } from 'api/Plugin';

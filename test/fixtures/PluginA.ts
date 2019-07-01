@@ -1,5 +1,5 @@
 import ExtensionFactory from '../../src/api/ExtensionFactory';
-import ExtensionDetails from '../../src/api/ExtensionDetails';
+import ExtensionDescriptor from '../../src/api/ExtensionDescriptor';
 import Plugin from '../../src/api/Plugin';
 import { EXTENSION_POINT_A } from './ExtensionPoints';
 
@@ -18,34 +18,19 @@ class ExtensionFactoryA implements ExtensionFactory {
     }
 }
 
-export class ExtensionDetailsA implements ExtensionDetails<string> {
+export class ExtensionDescriptorA implements ExtensionDescriptor<string> {
 
-    // eslint-disable-next-line class-methods-use-this
-    public getExtensionPointId(): string {
-        return EXTENSION_POINT_A;
-    }
+    public extensionPointId: string = EXTENSION_POINT_A;
 
-    // eslint-disable-next-line class-methods-use-this
-    public getFactory(): ExtensionFactory {
-        return new ExtensionFactoryA();
-    }
+    public factory: ExtensionFactory = new ExtensionFactoryA();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, class-methods-use-this
-    public getExtensionData(): any {
-        return 'foo';
-    }
+    public extensionData = 'foo';
 }
 
 export default class PluginA implements Plugin<string> {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, class-methods-use-this
-    public getExtensionDetails(): ExtensionDetails<string>[] {
-        return [
-            new ExtensionDetailsA()
-        ];
-    }
+    public extensionDescriptors: ExtensionDescriptor<string>[] = [
+        new ExtensionDescriptorA()
+    ];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, class-methods-use-this
-    public getPluginData(): any {
-        return 'bar';
-    }
+    public pluginData = 'bar';
 }

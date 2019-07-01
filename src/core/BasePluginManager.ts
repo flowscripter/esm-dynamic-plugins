@@ -80,19 +80,17 @@ export default class BasePluginManager<P_ID, EP_ID> implements PluginManager<P_I
 
         this.pluginRegistry.register(pluginId, plugin);
 
-        const extensionDetails = plugin.getExtensionDetails();
-
-        extensionDetails.forEach((currentExtensionDetails): void => {
+        plugin.extensionDescriptors.forEach((extensionDescriptor): void => {
 
             const extensionHandle: string = uuidv4();
 
-            const extensionPointId: EP_ID = currentExtensionDetails.getExtensionPointId();
+            const { extensionPointId } = extensionDescriptor;
 
             if (!this.extensionPointRegistry.isRegistered(extensionPointId)) {
                 throw new Error(`ExtensionPoint ID ${extensionPointId} referenced in plugin has not been registered`);
             }
 
-            this.extensionRegistry.register(extensionHandle, pluginId, currentExtensionDetails);
+            this.extensionRegistry.register(extensionHandle, pluginId, extensionDescriptor);
         });
     }
 
@@ -110,8 +108,8 @@ export default class BasePluginManager<P_ID, EP_ID> implements PluginManager<P_I
             yield {
                 extensionHandle: extensionPointTuple[0],
                 pluginId: extensionPointTuple[1],
-                extensionData: extensionPointTuple[2].getExtensionData(),
-                pluginData: this.pluginRegistry.get(extensionPointTuple[1]).getPluginData()
+                extensionData: extensionPointTuple[2].extensionData,
+                pluginData: this.pluginRegistry.get(extensionPointTuple[1]).pluginData
             };
         }
     }
@@ -135,6 +133,6 @@ export default class BasePluginManager<P_ID, EP_ID> implements PluginManager<P_I
             throw new Error(`Extension Handle ${extensionHandle} is unknown`);
         }
 
-        return this.extensionRegistry.get(extensionHandle).getFactory().create(hostData);
+        return this.extensionRegistry.get(extensionHandle).factory.create(hostData);
     }
 }

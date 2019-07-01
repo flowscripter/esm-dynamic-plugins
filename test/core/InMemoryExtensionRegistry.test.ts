@@ -18,7 +18,7 @@ describe('InMemoryExtensionRegistry test', () => {
 
         expect(registry.isRegistered(extensionHandle)).toBeFalsy();
 
-        registry.register(extensionHandle, pluginId, pluginA.getExtensionDetails()[0]);
+        registry.register(extensionHandle, pluginId, pluginA.extensionDescriptors[0]);
 
         expect(registry.isRegistered(extensionHandle)).toBeTruthy();
     });
@@ -30,10 +30,10 @@ describe('InMemoryExtensionRegistry test', () => {
         const pluginA = new PluginA();
         const registry = new InMemoryExtensionRegistry<string, string, string>();
 
-        registry.register(extensionHandle, pluginId, pluginA.getExtensionDetails()[0]);
+        registry.register(extensionHandle, pluginId, pluginA.extensionDescriptors[0]);
 
         expect(() => {
-            registry.register(extensionHandle, pluginId, pluginA.getExtensionDetails()[0]);
+            registry.register(extensionHandle, pluginId, pluginA.extensionDescriptors[0]);
         }).toThrow();
     });
 
@@ -56,7 +56,7 @@ describe('InMemoryExtensionRegistry test', () => {
 
         expect(Array.from(registry.getExtensions(EXTENSION_POINT_A))).toHaveLength(0);
 
-        registry.register(extensionHandle, pluginId, pluginA.getExtensionDetails()[0]);
+        registry.register(extensionHandle, pluginId, pluginA.extensionDescriptors[0]);
 
         expect(Array.from(registry.getExtensions(EXTENSION_POINT_A))).toHaveLength(1);
     });
@@ -71,8 +71,8 @@ describe('InMemoryExtensionRegistry test', () => {
         const pluginB = new PluginB();
         const registry = new InMemoryExtensionRegistry<string, string, string>();
 
-        registry.register(extensionHandle1, pluginIdA, pluginA.getExtensionDetails()[0]);
-        registry.register(extensionHandle2, pluginIdB, pluginB.getExtensionDetails()[0]);
+        registry.register(extensionHandle1, pluginIdA, pluginA.extensionDescriptors[0]);
+        registry.register(extensionHandle2, pluginIdB, pluginB.extensionDescriptors[0]);
 
         expect(Array.from(registry.getExtensions(EXTENSION_POINT_A))).toHaveLength(2);
     });
@@ -88,9 +88,9 @@ describe('InMemoryExtensionRegistry test', () => {
         const pluginB = new PluginB();
         const registry = new InMemoryExtensionRegistry<string, string, string>();
 
-        registry.register(extensionHandle1, pluginIdA, pluginA.getExtensionDetails()[0]);
-        registry.register(extensionHandle2, pluginIdB, pluginB.getExtensionDetails()[0]);
-        registry.register(extensionHandle3, pluginIdB, pluginB.getExtensionDetails()[1]);
+        registry.register(extensionHandle1, pluginIdA, pluginA.extensionDescriptors[0]);
+        registry.register(extensionHandle2, pluginIdB, pluginB.extensionDescriptors[0]);
+        registry.register(extensionHandle3, pluginIdB, pluginB.extensionDescriptors[1]);
 
         expect(Array.from(registry.getExtensions(EXTENSION_POINT_A))).toHaveLength(2);
         expect(Array.from(registry.getExtensions(EXTENSION_POINT_B))).toHaveLength(1);
@@ -104,7 +104,7 @@ describe('InMemoryExtensionRegistry test', () => {
         const pluginA = new PluginA();
         const registry = new InMemoryExtensionRegistry<string, string, string>();
 
-        registry.register(extensionHandle1, pluginIdA, pluginA.getExtensionDetails()[0]);
+        registry.register(extensionHandle1, pluginIdA, pluginA.extensionDescriptors[0]);
 
         expect(Array.from(registry.getExtensions(EXTENSION_POINT_B))).toHaveLength(0);
     });
