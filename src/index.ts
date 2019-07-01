@@ -1,5 +1,11 @@
 /**
- * @module @flowscripter/ts-template
+ * @module @flowscripter/esm-dynamic-plugins
  */
-export { default as Foo } from 'foo';
-export { default as Bar } from 'bar';
+
+export { default as ExtensionDetails } from 'api/ExtensionDetails';
+export { default as ExtensionInfo } from 'api/ExtensionInfo';
+export { default as ExtensionFactory } from 'api/ExtensionFactory';
+export { default as Plugin } from 'api/Plugin';
+export { default as PluginManager } from 'api/PluginManager';
+export { default as BrowserPluginManager } from 'core/BrowserPluginManager';
+export { default as NodePluginManager } from 'core/NodePluginManager';

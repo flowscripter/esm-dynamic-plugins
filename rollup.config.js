@@ -8,10 +8,16 @@ import ts from 'typescript';
 import tempDir from 'temp-dir';
 
 module.exports = {
-    input: 'src/index.ts',
+    input: {
+        index: 'src/index.ts',
+        BasePluginManager: 'src/core/BasePluginManager.ts',
+        NodePluginManager: 'src/core/NodePluginManager.ts',
+        BrowserPluginManager: 'src/core/BrowserPluginManager.ts'
+    },
     output: {
-        file: 'dist/index.mjs',
-        format: 'es'
+        dir: 'dist',
+        format: 'es',
+        entryFileNames: '[name].mjs'
     },
     watch: {
         include: 'src/**',
@@ -30,6 +36,8 @@ module.exports = {
         }),
         commonjs(),
         resolve(),
-        cleanup({extensions: ['ts']})
+        cleanup({
+            extensions: ['ts']
+        })
     ]
 };

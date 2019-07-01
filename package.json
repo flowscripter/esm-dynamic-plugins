@@ -32,7 +32,7 @@
     "main": "dist/index.mjs",
     "module": "dist/index.mjs",
     "files": [
-        "dist"
+        "dist/**/*"
     ],
     "typings": "dist/types/index.d.ts",
     "engines": {
@@ -43,8 +43,8 @@
         "build": "npx rollup -c",
         "watch": "npx rollup -c --watch",
         "test": "npx jest",
-        "lint": "npx eslint ./src/** ./test/**",
-        "docs": "npx typedoc src"
+        "lint": "npx eslint ./src/**/*.ts ./test/**/*.ts",
+        "docs": "npx typedoc --moduleResolution node src"
     },
     "devDependencies": {
         "@commitlint/cli": "8.0.0",
@@ -53,6 +53,7 @@
         "@flowscripter/tsconfig": "1.1.0",
         "@types/debug": "4.1.4",
         "@types/jest": "24.0.15",
+        "@types/uuidv4": "^2.0.0",
         "@typescript-eslint/eslint-plugin": "1.11.0",
         "@typescript-eslint/parser": "1.11.0",
         "eslint": "5.16.0",
@@ -82,5 +83,7 @@
     "peerDependencies": {
         "debug": "^4.1.1"
     },
-    "dependencies": {}
+    "dependencies": {
+        "uuidv4": "^4.0.0"
+    }
 }
