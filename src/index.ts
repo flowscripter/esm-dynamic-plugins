@@ -3,6 +3,7 @@
  */
 
 export { default as ExtensionDetails } from 'api/ExtensionDetails';
+export { default as ExtensionInfo } from 'api/ExtensionInfo';
 export { default as ExtensionFactory } from 'api/ExtensionFactory';
 export { default as Plugin } from 'api/Plugin';
 export { default as PluginManager } from 'api/PluginManager';

@@ -50,8 +50,6 @@ possible to bypass the framework altogether and import an *Extension* and use it
  
 [Direct Instantiation Sequence Diagram](images/direct_instantiation_sequence_diagram.png "Direct Instantiation Sequence Diagram")
 
-#### Core Plugins
-
 #### NO LEGACY SUPPORT
 
 Please note, that this project makes no attempt to support legacy Javascript versions or runtimes. 

@@ -1,47 +1,8 @@
 import InMemoryPluginRegistry from '../../src/core/InMemoryPluginRegistry';
-import Plugin from '../../src/api/Plugin';
-import ExtensionDetails from '../../src/api/ExtensionDetails';
-import ExtensionFactory from '../../src/api/ExtensionFactory';
+import PluginA from '../fixtures/PluginA';
+import PluginB from '../fixtures/PluginB';
 
 describe('InMemoryPluginRegistry test', () => {
-
-    const EXTENSION_POINT_A = 'ExtensionPointA';
-
-    class ExtensionA {
-        // eslint-disable-next-line class-methods-use-this
-        public sayHello(): void {
-        }
-    }
-
-    class ExtensionFactoryA implements ExtensionFactory {
-        // eslint-disable-next-line max-len
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, class-methods-use-this
-        public create(hostData?: any): ExtensionA {
-            return new ExtensionA();
-        }
-    }
-
-    class ExtensionDetailsA implements ExtensionDetails<string> {
-
-        // eslint-disable-next-line class-methods-use-this
-        public getExtensionPointId(): string {
-            return EXTENSION_POINT_A;
-        }
-
-        // eslint-disable-next-line class-methods-use-this
-        public getFactory(): ExtensionFactory {
-            return new ExtensionFactoryA();
-        }
-    }
-
-    class PluginA implements Plugin<string, string> {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any, class-methods-use-this
-        public getExtensionDetails(): ExtensionDetails<string>[] {
-            return [
-                new ExtensionDetailsA()
-            ];
-        }
-    }
 
     it('InMemoryPluginRegistry is instantiable', () => {
         expect(new InMemoryPluginRegistry<string, string>()).toBeInstanceOf(InMemoryPluginRegistry);
@@ -50,41 +11,65 @@ describe('InMemoryPluginRegistry test', () => {
     it('Plugin can be registered successfully', () => {
 
         const pluginId = 'foo';
-
         const registry = new InMemoryPluginRegistry<string, string>();
 
         expect(Array.from(registry.getAll())).toHaveLength(0);
-
         expect(registry.isRegistered(pluginId)).toBe(false);
 
         registry.register(pluginId, new PluginA());
 
         expect(Array.from(registry.getAll())).toHaveLength(1);
-
         expect(registry.isRegistered(pluginId)).toBe(true);
     });
 
     it('Plugin cannot be re-registered with same ID', () => {
 
+        const pluginId = 'foo';
+        const registry = new InMemoryPluginRegistry<string, string>();
+
+        registry.register(pluginId, new PluginA());
+
+        expect(() => {
+            registry.register(pluginId, new PluginA());
+        }).toThrow();
     });
 
-    it('Plugin cannot be registered twice with different IDs', () => {
+    it('Plugin can be registered twice with different IDs although this is not recommended', () => {
 
+        const pluginIdA1 = 'foo';
+        const pluginIdA2 = 'bar';
+        const pluginA = new PluginA();
+        const registry = new InMemoryPluginRegistry<string, string>();
+
+        registry.register(pluginIdA1, pluginA);
+
+        expect(Array.from(registry.getAll())).toHaveLength(1);
+        expect(registry.isRegistered(pluginIdA1)).toBe(true);
+
+        registry.register(pluginIdA2, pluginA);
+
+        expect(Array.from(registry.getAll())).toHaveLength(2);
+        expect(registry.isRegistered(pluginIdA2)).toBe(true);
     });
 
-    it('Two plugins can be re-registered', () => {
+    it('Two plugins can be registered', () => {
 
-    });
+        const pluginIdA = 'foo';
+        const pluginIdB = 'bar';
+        const pluginA = new PluginA();
+        const pluginB = new PluginB();
+        const registry = new InMemoryPluginRegistry<string, string>();
 
-    it('Extension Details can be retrieved', () => {
+        registry.register(pluginIdA, pluginA);
 
-    });
+        expect(Array.from(registry.getAll())).toHaveLength(1);
+        expect(registry.isRegistered(pluginIdA)).toBe(true);
+        expect(registry.isRegistered(pluginIdB)).toBe(false);
 
-    it('Extension Details for same Extension Point across two Plugins can be retrieved', () => {
+        registry.register(pluginIdB, pluginB);
 
-    });
-
-    it('Extension Details for unknown Extension Point cannot be retrieved', () => {
-
+        expect(Array.from(registry.getAll())).toHaveLength(2);
+        expect(registry.isRegistered(pluginIdA)).toBe(true);
+        expect(registry.isRegistered(pluginIdB)).toBe(true);
     });
 });

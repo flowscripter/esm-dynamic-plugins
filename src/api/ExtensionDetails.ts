@@ -17,6 +17,14 @@ export default interface ExtensionDetails<EP_ID> {
     getExtensionPointId(): EP_ID;
 
     /**
+     * Returns optional data provided by the Extension.
+     *
+     * @return optional data
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getExtensionData(): any;
+
+    /**
      * Returns an [[ExtensionFactory]] which can be used to create an instance of the Extension Point to which
      * this [[ExtensionDetails]] object relates.
      *
