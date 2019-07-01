@@ -17,7 +17,7 @@ module.exports = {
         'lcov'
     ],
     collectCoverageFrom: [
-        'src/*.ts'
+        'src/**/*.ts'
     ],
     coverageDirectory: 'reports'
 };
