@@ -15,8 +15,6 @@ discovered and imported into a running Javascript process.
 #### Key Features 
 
 * Isomorphic support for both NodeJS and browser Javascript runtimes
-* Implemented as a lightweight basic framework, with further functionality implemented as core plugins
-* Pluggable implementations for deployment, installation and scanning of plugins 
 * Dynamic plugin import using [Javascript dynamic import](https://github.com/tc39/proposal-dynamic-import)
 * ES2015 module based
 * Written in Typescript
@@ -25,21 +23,22 @@ discovered and imported into a running Javascript process.
 
 The framework's key concepts are borrowed from the Eclipse Project's extension framework. The key concepts are:
  
-* *ExtensionPoints* are declared in an *ExtensionPointRegister* by a *HostApplication*
+* A *HostApplication* instantiates a *PluginManager* 
+* The *PluginManager* provides an *ExtensionPointRegister* 
+* The *HostApplication* can declare *ExtensionPoints* in the *ExtensionPointRegister*
 * A *Plugin* provides one or more *Extensions* for one or more *ExtensionPoints*
-* A *Plugin* provides *ExtensionDetails* for each *Extension* it provides
-* A *HostApplication* declares an *ExtensionPointRegister* and provides it to a *PluginManager*
-* A *PluginManager* registers available *Plugins* which provide *Extensions* for the declared *ExtensionPoints*
+* A *Plugin* provides an *ExtensionDescriptor* for each *Extension* it provides
+* A *PluginManager* scans for and registers *Plugins* which provide *Extensions* for the known *ExtensionPoints*
 * A *HostApplication* uses the *PluginManager* to query for and select an *Extension* for a desired *ExtensionPoint*
-* The *PluginManager* uses an *ExtensionFactory* provided by an *ExtensionDetails* to instantiate a selected *Extension* 
+* The *PluginManager* uses an *ExtensionFactory* declared in an *ExtensionDescriptor* to instantiate a selected *Extension* 
 
 The following high level class diagram illustrates these relationships:
 
 ![High Level Class Diagram](images/high_level_class_diagram.png "High Level Class Diagram")
 
-The following sequence diagram illustrates the key steps for a *HostApplication* to use a *PluginManager* for static registration of known *Plugins*: 
+The following sequence diagram illustrates the key steps for a *HostApplication* to use a *PluginManager* for discovery and registration of *Plugins*: 
 
-![Static Registration Sequence Diagram](images/static_registration_sequence_diagram.png "Static Registration Sequence Diagram")
+![Registration Sequence Diagram](images/registration_sequence_diagram.png "Registration Sequence Diagram")
 
 Once registration has been performed, the *HostApplication* may query for and instantiate *Extensions* for known *ExtensionPoints*:
 
@@ -63,14 +62,9 @@ Because of this the project's exported module is configured so that:
  
 * no transpiling is performed (apart from TypeScript to ES2015 JavaScript)
 * `package.json` specifies:
-    * `"main": "dist/index.mjs"` (as per: https://nodejs.org/api/esm.html#esm_enabling and
-https://github.com/nodejs/node-eps/blob/master/002-es-modules.md#44-shipping-both-esm-and-cjs)
-    * `"module": "dist/index.mjs"` (as per: https://github.com/rollup/rollup/wiki/pkg.module)
+    * `"main": "dist/index.js"`
+    * `"type": "module"`
     * `"node": ">=10.15.1"` so that the `--experimental-modules` flag can be used
-
-## Installation
-
-## Usage
 
 ## API
 
@@ -95,6 +89,10 @@ Test: `npm test`
 Lint: `npm run lint`
 
 Docs: `npm run docs`
+
+The following diagram provides an overview of the main classes:
+
+![Implementation Class Diagram](images/implementation_class_diagram.png "Implementation Class Diagram")
 
 ## License
 
