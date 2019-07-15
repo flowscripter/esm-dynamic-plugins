@@ -14,7 +14,7 @@ discovered and imported into a running Javascript process.
 
 #### Key Features 
 
-* Isomorphic support for both NodeJS and browser Javascript runtimes
+* Universal support for both NodeJS and browser Javascript runtimes
 * Dynamic plugin import using [Javascript dynamic import](https://github.com/tc39/proposal-dynamic-import)
 * ES2015 module based
 * Written in Typescript
