@@ -16,8 +16,7 @@ module.exports = {
     },
     output: {
         dir: 'dist',
-        format: 'es',
-        entryFileNames: '[name].mjs'
+        format: 'es'
     },
     watch: {
         include: 'src/**',
