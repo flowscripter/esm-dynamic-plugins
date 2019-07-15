@@ -19,7 +19,7 @@ export default interface Plugin<EP_ID> {
     readonly extensionDescriptors: ExtensionDescriptor<EP_ID>[];
 
     /**
-     * Optional data provided by the Plugin.
+     * Optional data provided by the Plugin to the host application
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly pluginData?: any;

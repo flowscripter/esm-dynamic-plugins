@@ -1,6 +1,6 @@
-import InMemoryPluginRegistry from '../../src/core/InMemoryPluginRegistry';
-import PluginA from '../fixtures/PluginA';
-import PluginB from '../fixtures/PluginB';
+import InMemoryPluginRegistry from '../../../src/core/registry/InMemoryPluginRegistry';
+import PluginA from '../../fixtures/PluginA';
+import PluginB from '../../fixtures/PluginB';
 
 describe('InMemoryPluginRegistry test', () => {
 
@@ -9,7 +9,6 @@ describe('InMemoryPluginRegistry test', () => {
     });
 
     it('Plugin can be registered successfully', () => {
-
         const pluginId = 'foo';
         const registry = new InMemoryPluginRegistry<string, string>();
 
@@ -23,7 +22,6 @@ describe('InMemoryPluginRegistry test', () => {
     });
 
     it('Plugin cannot be re-registered with same ID', () => {
-
         const pluginId = 'foo';
         const registry = new InMemoryPluginRegistry<string, string>();
 
@@ -35,7 +33,6 @@ describe('InMemoryPluginRegistry test', () => {
     });
 
     it('Plugin can be registered twice with different IDs although this is not recommended', () => {
-
         const pluginIdA1 = 'foo';
         const pluginIdA2 = 'bar';
         const pluginA = new PluginA();
@@ -53,7 +50,6 @@ describe('InMemoryPluginRegistry test', () => {
     });
 
     it('Two plugins can be registered', () => {
-
         const pluginIdA = 'foo';
         const pluginIdB = 'bar';
         const pluginA = new PluginA();

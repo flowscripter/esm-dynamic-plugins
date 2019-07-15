@@ -2,7 +2,7 @@
  * @module @flowscripter/esm-dynamic-plugins
  */
 
-import Plugin from '../api/Plugin';
+import Plugin from '../../api/Plugin';
 import PluginRegistry from './PluginRegistry';
 
 /**

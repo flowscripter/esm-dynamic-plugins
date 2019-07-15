@@ -1,23 +1,26 @@
 import ExtensionFactory from '../../src/api/ExtensionFactory';
 import ExtensionDescriptor from '../../src/api/ExtensionDescriptor';
 import Plugin from '../../src/api/Plugin';
-import { EXTENSION_POINT_B } from './ExtensionPoints';
+import ExtensionPointB, { EXTENSION_POINT_B_ID } from './ExtensionPointB';
 import { ExtensionDescriptorA } from './PluginA';
 
-class ExtensionB {
+class ExtensionB implements ExtensionPointB {
+
+    // eslint-disable-next-line class-methods-use-this
+    public sayGoodbye(): void {
+    }
 }
 
 class ExtensionFactoryB implements ExtensionFactory {
-    // eslint-disable-next-line max-len
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, class-methods-use-this
-    public create(hostData?: any): ExtensionB {
-        return new ExtensionB();
+    // eslint-disable-next-line class-methods-use-this
+    public create(): Promise<ExtensionB> {
+        return Promise.resolve(new ExtensionB());
     }
 }
 
 class ExtensionDescriptorB implements ExtensionDescriptor<string> {
 
-    public extensionPointId: string = EXTENSION_POINT_B;
+    public extensionPointId: string = EXTENSION_POINT_B_ID;
 
     public factory: ExtensionFactory = new ExtensionFactoryB();
 }

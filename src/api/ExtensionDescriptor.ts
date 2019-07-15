@@ -23,7 +23,7 @@ export default interface ExtensionDescriptor<EP_ID> {
     readonly factory: ExtensionFactory;
 
     /**
-     * Optional data provided by the Extension.
+     * Optional data provided by the Extension to the host application
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly extensionData?: any;

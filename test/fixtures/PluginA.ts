@@ -1,9 +1,9 @@
 import ExtensionFactory from '../../src/api/ExtensionFactory';
 import ExtensionDescriptor from '../../src/api/ExtensionDescriptor';
 import Plugin from '../../src/api/Plugin';
-import { EXTENSION_POINT_A } from './ExtensionPoints';
+import ExtensionPointA, { EXTENSION_POINT_A_ID } from './ExtensionPointA';
 
-class ExtensionA {
+class ExtensionA implements ExtensionPointA {
 
     // eslint-disable-next-line class-methods-use-this
     public sayHello(): void {
@@ -11,16 +11,15 @@ class ExtensionA {
 }
 
 class ExtensionFactoryA implements ExtensionFactory {
-    // eslint-disable-next-line max-len
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, class-methods-use-this
-    public create(hostData?: any): ExtensionA {
-        return new ExtensionA();
+    // eslint-disable-next-line class-methods-use-this
+    public create(): Promise<ExtensionA> {
+        return Promise.resolve(new ExtensionA());
     }
 }
 
 export class ExtensionDescriptorA implements ExtensionDescriptor<string> {
 
-    public extensionPointId: string = EXTENSION_POINT_A;
+    public extensionPointId: string = EXTENSION_POINT_A_ID;
 
     public factory: ExtensionFactory = new ExtensionFactoryA();
 

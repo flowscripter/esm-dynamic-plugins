@@ -12,8 +12,8 @@ export default interface ExtensionFactory {
      *
      * @param hostData optional host data to pass into the the Extension constructor.
      *
-     * @return an instance of Extension implementing an Extension Point.
+     * @return an Extension instance implementing an Extension Point.
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    create(hostData?: any): any;
+    create(hostData?: any): Promise<any>;
 }

@@ -6,14 +6,12 @@ import ExtensionInfo from './ExtensionInfo';
 import Plugin from './Plugin';
 
 /**
- * Used by a host application to register [[Plugin]] implementations
+ * Used by a host application to scan for [[Plugin]] implementations
  * and to query for and instantiate Extension Points implemented by those plugins.
  *
- * @typeparam P_ID is the type of the Plugin IDs used by this plugin manager instance.
  * @typeparam EP_ID is the type of the Extension Point IDs used by this plugin manager instance.
- * @typeparam E_H is the type of the Extension Handles used by this plugin manager instance.
  */
-export default interface PluginManager<P_ID, EP_ID, E_H> {
+export default interface PluginManager<EP_ID> {
 
     /**
      * Registers an Extension Point with the [[PluginManager]].
@@ -30,38 +28,70 @@ export default interface PluginManager<P_ID, EP_ID, E_H> {
     getRegisteredExtensionPoints(): Iterable<EP_ID>;
 
     /**
-     * Registers a [[Plugin]] with the [[PluginManager]].
+     * Scan for and register plugins which provide an Extension for the specified Extension Point.
      *
-     * @param pluginId a unique identifier under which to register the [[Plugin]]
-     * @param plugin the [[Plugin]] implementation to register
+     * Any existing registered plugins will be skipped.
+     *
+     * Any extensions provided by matching plugins which are for unregistered extension points will be skipped.
+     *
+     * @param extensionPointId the Extension Point ID for which to return Extensions
+     *
+     * @return a count of newly discovered and registered [[Plugin]] implementations
      */
-    registerPlugin(pluginId: P_ID, plugin: Plugin<EP_ID>): void;
+    registerPluginsByExtensionPoint(extensionPointId: EP_ID): Promise<number>;
+
+    /**
+     * Scan for and register plugins with the specified matching module name and optional scope.
+     *
+     * Any existing registered plugins will be skipped.
+     *
+     * Any extensions provided by matching plugins which are for unregistered extension points will be skipped.
+     *
+     * @param moduleName the name by which to filter plugins
+     * @param moduleScope the optional scope by which to filter plugins
+     *
+     * @return a count of newly discovered and registered [[Plugin]] implementations
+     */
+    registerPluginsByModuleName(moduleName: string, moduleScope?: string): Promise<number>;
+
+    /**
+     * Scan for and register plugins with the specified matching module scope.
+     *
+     * Any existing registered plugins will be skipped.
+     *
+     * Any extensions provided by matching plugins which are for unregistered extension points will be skipped.
+     *
+     * @param moduleScope the scope by which to filter plugins
+     *
+     * @return a count of newly discovered and registered [[Plugin]] implementations
+     */
+    registerPluginsByModuleScope(moduleScope: string): Promise<number>;
 
     /**
      * Return all registered plugins.
      *
-     * @return an iterable of tuples [P_ID, [[Plugin]]] for all registered [[Plugin]] implementations
+     * @return an iterable of registered [[Plugin]] implementations
      */
-    getRegisteredPlugins(): Iterable<[P_ID, Plugin<EP_ID>]>;
+    getRegisteredPlugins(): Iterable<Plugin<EP_ID>>;
 
     /**
-     * Gets information of Extensions for the specified Extension Point ID provided by the currently
+     * Gets information of Extensions for the specified Extension Point provided by the currently
      * registered [[Plugin]] implementations.
      *
      * @param extensionPointId the Extension Point ID for which to return Extensions
      *
      * @return iterable of [[ExtensionInfo]]
      */
-    getExtensions(extensionPointId: EP_ID): Iterable<ExtensionInfo<P_ID, E_H>>;
+    getExtensions(extensionPointId: EP_ID): Iterable<ExtensionInfo>;
 
     /**
      * Instantiate a specified Extension.
      *
-     * @param extensionHandle the Extension Handle for the Extension to instantiate
+     * @param extensionHandle the opaque handle for the Extension provided by the Plugin Manager instance
      * @param hostData optional data to be passed in to the Extension via an [[ExtensionFactory.create()]] function.
      *
      * @return an Extension instance
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    instantiate(extensionHandle: E_H, hostData?: any): any;
+    instantiate(extensionHandle: {}, hostData?: any): Promise<any>;
 }
