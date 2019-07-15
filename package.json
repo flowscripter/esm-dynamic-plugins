@@ -29,8 +29,8 @@
     "publishConfig": {
         "access": "public"
     },
-    "main": "dist/index.mjs",
-    "module": "dist/index.mjs",
+    "main": "dist/index.js",
+    "type": "module",
     "files": [
         "dist/**/*"
     ],
@@ -47,12 +47,12 @@
         "docs": "npx typedoc --moduleResolution node src"
     },
     "devDependencies": {
-        "@commitlint/cli": "8.0.0",
+        "@commitlint/cli": "^8.1.0",
         "@commitlint/config-conventional": "8.0.0",
-        "@flowscripter/eslint-config": "1.2.8",
-        "@flowscripter/tsconfig": "1.1.0",
-        "@types/debug": "4.1.4",
+        "@flowscripter/eslint-config": "1.2.11",
+        "@flowscripter/tsconfig": "1.1.1",
         "@types/jest": "24.0.15",
+        "@types/lodash": "^4.14.135",
         "@types/uuidv4": "^2.0.0",
         "@typescript-eslint/eslint-plugin": "1.11.0",
         "@typescript-eslint/parser": "1.11.0",
@@ -80,10 +80,8 @@
         "typedoc-plugin-external-module-name": "2.1.0",
         "typescript": "3.5.2"
     },
-    "peerDependencies": {
-        "debug": "^4.1.1"
-    },
     "dependencies": {
+        "lodash": "^4.17.14",
         "uuidv4": "^4.0.0"
     }
 }
