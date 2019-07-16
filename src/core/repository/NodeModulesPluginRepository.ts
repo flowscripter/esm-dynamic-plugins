@@ -7,18 +7,16 @@ import debug from 'debug';
 import fs, { Dirent } from 'fs';
 import path from 'path';
 import Plugin from '../../api/Plugin';
-import PluginRepository from './PluginRepository';
+import AbstractPluginRepository from './AbstractPluginRepository';
 import { loadPlugin } from './PluginLoader';
 
 /**
  * Implementation of a [[PluginRepository]] which loads modules from a `node_modules` local folder
  * containing Node packages with accompanying `package.json` files.
  *
- * A Plugin ID takes the form of a local filesystem path to a Node package.
- *
  * @typeparam EP_ID is the type of the Extension Point IDs used by this plugin manager instance.
  */
-export default class NodeModulesPluginRepository<EP_ID> implements PluginRepository<string, EP_ID> {
+export default class NodeModulesPluginRepository<EP_ID> extends AbstractPluginRepository<EP_ID> {
 
     private readonly log: debug.Debugger = debug('NodeModulesPluginRepository');
 
@@ -45,6 +43,7 @@ export default class NodeModulesPluginRepository<EP_ID> implements PluginReposit
      * @param searchPaths optional array of search paths.
      */
     public constructor(searchPaths?: string[]) {
+        super();
         if (searchPaths) {
             this.searchPaths = searchPaths;
         } else {
@@ -149,8 +148,8 @@ export default class NodeModulesPluginRepository<EP_ID> implements PluginReposit
         }
     }
 
-    private async* pluginGenerator(moduleScope: string | undefined, moduleName: string | undefined,
-        extensionPointId: EP_ID | undefined): AsyncIterable<[string, Plugin<EP_ID>]> {
+    protected async* pluginGenerator(moduleScope: string | undefined, moduleName: string | undefined,
+        extensionPointId: EP_ID | undefined): AsyncIterableIterator<[string, Plugin<EP_ID>]> {
 
         for await (const candidatePath of this.filteredPathGenerator(moduleScope, moduleName)) {
             try {
@@ -174,33 +173,5 @@ export default class NodeModulesPluginRepository<EP_ID> implements PluginReposit
                 this.log(`Discarding error: ${err}`);
             }
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public getAllPlugins(): AsyncIterable<[string, Plugin<EP_ID>]> {
-        return this.pluginGenerator(undefined, undefined, undefined);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public getPluginsByExtensionPoint(extensionPointId: EP_ID): AsyncIterable<[string, Plugin<EP_ID>]> {
-        return this.pluginGenerator(undefined, undefined, extensionPointId);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public getPluginsByModuleName(moduleName: string, moduleScope?: string): AsyncIterable<[string, Plugin<EP_ID>]> {
-        return this.pluginGenerator(moduleScope, moduleName, undefined);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public getPluginsByModuleScope(moduleScope: string): AsyncIterable<[string, Plugin<EP_ID>]> {
-        return this.pluginGenerator(moduleScope, undefined, undefined);
     }
 }

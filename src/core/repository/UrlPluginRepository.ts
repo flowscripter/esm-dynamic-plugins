@@ -5,7 +5,7 @@
 import _ from 'lodash';
 import debug from 'debug';
 import Plugin from '../../api/Plugin';
-import PluginRepository from './PluginRepository';
+import AbstractPluginRepository from './AbstractPluginRepository';
 import { loadPlugin } from './PluginLoader';
 
 /**
@@ -17,11 +17,9 @@ import { loadPlugin } from './PluginLoader';
  *
  * `https://unpkg.com/@my-scope/my-plugin-module`
  *
- * A Plugin ID takes the form of a URL to a module entry point.
- *
  * @typeparam EP_ID is the type of the Extension Point IDs used by this plugin manager instance.
  */
-export default class UrlPluginRepository<EP_ID> implements PluginRepository<string, EP_ID> {
+export default class UrlPluginRepository<EP_ID> extends AbstractPluginRepository<EP_ID> {
 
     private readonly log: debug.Debugger = debug('UrlPluginRepository');
 
@@ -36,6 +34,7 @@ export default class UrlPluginRepository<EP_ID> implements PluginRepository<stri
      * @param moduleUrls array of module URLs.
      */
     public constructor(moduleUrls: string[]) {
+        super();
         this.moduleUrls = moduleUrls;
     }
 
@@ -71,8 +70,8 @@ export default class UrlPluginRepository<EP_ID> implements PluginRepository<stri
         }
     }
 
-    private async* pluginGenerator(moduleScope: string | undefined, moduleName: string | undefined,
-        extensionPointId: EP_ID | undefined): AsyncIterable<[string, Plugin<EP_ID>]> {
+    protected async* pluginGenerator(moduleScope: string | undefined, moduleName: string | undefined,
+        extensionPointId: EP_ID | undefined): AsyncIterableIterator<[string, Plugin<EP_ID>]> {
 
         for await (const candidateUrl of this.filteredUrlGenerator(moduleScope, moduleName)) {
             try {
@@ -89,33 +88,5 @@ export default class UrlPluginRepository<EP_ID> implements PluginRepository<stri
                 this.log(`Discarding error: ${err}`);
             }
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public getAllPlugins(): AsyncIterable<[string, Plugin<EP_ID>]> {
-        return this.pluginGenerator(undefined, undefined, undefined);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public getPluginsByExtensionPoint(extensionPointId: EP_ID): AsyncIterable<[string, Plugin<EP_ID>]> {
-        return this.pluginGenerator(undefined, undefined, extensionPointId);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public getPluginsByModuleName(moduleName: string, moduleScope?: string): AsyncIterable<[string, Plugin<EP_ID>]> {
-        return this.pluginGenerator(moduleScope, moduleName, undefined);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public getPluginsByModuleScope(moduleScope: string): AsyncIterable<[string, Plugin<EP_ID>]> {
-        return this.pluginGenerator(moduleScope, undefined, undefined);
     }
 }
