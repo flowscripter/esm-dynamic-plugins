@@ -1,5 +1,5 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins
+ * @module @flowscripter/esm-dynamic-plugins-api
  */
 
 /**

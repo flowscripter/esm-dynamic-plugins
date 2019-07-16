@@ -3,8 +3,9 @@
     "mode": "modules",
     "out": "docs",
     "theme": "minimal",
-    "ignoreCompilerErrors": "false",
+    "ignoreCompilerErrors": false,
     "preserveConstEnums": "true",
-    "hideGenerator": "true",
+    "hideGenerator": true,
+    "exclude": ["src/index.ts"],
     "readme": "none"
 }

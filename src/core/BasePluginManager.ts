@@ -1,5 +1,5 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins
+ * @module @flowscripter/esm-dynamic-plugins-core
  */
 import _ from 'lodash';
 import uuidv4 from 'uuidv4';
