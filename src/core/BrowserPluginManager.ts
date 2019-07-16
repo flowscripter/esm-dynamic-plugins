@@ -3,47 +3,33 @@
  */
 
 import BasePluginManager from './BasePluginManager';
+import UrlPluginRepository from './repository/UrlPluginRepository';
 
 
 /**
  * Implementation of a [[PluginManager]] for a browser runtime.
+ *
+ * Supports modules hosted at a list of URLs of the form:
+ *
+ * `https://<host>/[@scope/<name>]`
+ *
+ * e.g.:
+ *
+ * `https://unpkg.com/@my-scope/my-plugin-module`
+ *
+ *
  */
 export default class BrowserPluginManager extends BasePluginManager<string> {
-    // TODO: implement
 
-    // private repository: PluginRepository<string, string>;
-    //
-    // /**
-    //  * Constructor configures the instance using the optionally specified [[PluginRegistry]].
-    //  * Defaults to using an [[InMemoryPluginRegistry]].
-    //  */
-    // public constructor() {
-    //     super();
-    //
-    //     this.registerExtensionPoint(PLUGIN_REPOSITORY_ID);
-    //     this.registerPlugin(uuidv4(), new BrowserRuntimePlugin());
-    //
-    //     const info = Array.from(this.getExtensions(PLUGIN_REPOSITORY_ID))[0];
-    //
-    //     this.repository = this.instantiate(info.extensionHandle);
-    // }
-    //
-    // private static* makePluginIterator(tuples: Iterable<[string, Plugin<string>]>): Iterable<Plugin<string>> {
-    //     for (const tuple of tuples) {
-    //         yield tuple[1];
-    //     }
-    // }
-    //
-    // public registerPluginsByExtensionPoint(extensionPointId: string): Iterable<Plugin<string>> {
-    //     return BrowserPluginManager.makePluginIterator(this.repository.getPluginsByExtensionPoint(extensionPointId));
-    // }
-    //
-    // public registerPluginsByModuleName(moduleName: string, moduleScope?: string): Iterable<Plugin<string>> {
-    //     return BrowserPluginManager.makePluginIterator(this.repository.getPluginsByModuleName(moduleName,
-    //     moduleScope));
-    // }
-    //
-    // public registerPluginsByModuleScope(moduleScope: string): Iterable<Plugin<string>> {
-    //     return BrowserPluginManager.makePluginIterator(this.repository.getPluginsByModuleScope(moduleScope));
-    // }
+    /**
+     * Constructor configures the instance using the specified array of module URLs.
+     *
+     * These URLs are filtered by scope and module name if specified. The modules will then be loaded and filtered
+     * by extension ID if this has been specified.
+     *
+     * @param moduleUrls array of module URLs.
+     */
+    public constructor(moduleUrls: string[]) {
+        super(new UrlPluginRepository(moduleUrls));
+    }
 }

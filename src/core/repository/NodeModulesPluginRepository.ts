@@ -3,11 +3,12 @@
  */
 
 import _ from 'lodash';
+import debug from 'debug';
 import fs, { Dirent } from 'fs';
 import path from 'path';
 import Plugin from '../../api/Plugin';
 import PluginRepository from './PluginRepository';
-import { Class } from './Class';
+import { loadPlugin } from './PluginLoader';
 
 /**
  * Implementation of a [[PluginRepository]] which loads modules from a `node_modules` local folder
@@ -18,6 +19,8 @@ import { Class } from './Class';
  * @typeparam EP_ID is the type of the Extension Point IDs used by this plugin manager instance.
  */
 export default class NodeModulesPluginRepository<EP_ID> implements PluginRepository<string, EP_ID> {
+
+    private readonly log: debug.Debugger = debug('NodeModulesPluginRepository');
 
     private readonly searchPaths: string[];
 
@@ -73,11 +76,11 @@ export default class NodeModulesPluginRepository<EP_ID> implements PluginReposit
                     }
 
                     // otherwise we should skip them based on name filtering if defined
-                    return _.isUndefined(moduleName) || folderName.startsWith(moduleName);
+                    return _.isUndefined(moduleName) || (folderName === moduleName);
                 }
 
                 // scoped folders should be scanned recursively after filtering on module scope
-                if (_.isUndefined(moduleScope) || folderName.startsWith(moduleScope)) {
+                if (_.isUndefined(moduleScope) || (folderName === moduleScope)) {
 
                     // We only recurse folders one level
                     if (!isScopedFolder) {
@@ -131,14 +134,6 @@ export default class NodeModulesPluginRepository<EP_ID> implements PluginReposit
             .then((jsonString): any => JSON.parse(jsonString));
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private static async getModule(candidatePath: string, packageMetadata: any): Promise<unknown> {
-
-        const modulePath = path.join(candidatePath, packageMetadata.main);
-
-        return import(modulePath);
-    }
-
     private async* filteredPathGenerator(moduleScope: string | undefined, moduleName: string | undefined):
     AsyncIterable<string> {
 
@@ -165,51 +160,18 @@ export default class NodeModulesPluginRepository<EP_ID> implements PluginReposit
                 // check if package is a module
                 if (packageMetadata.type === 'module') {
 
-                    const potentialClass: unknown = await NodeModulesPluginRepository.getModule(candidatePath,
-                        packageMetadata);
+                    const pluginLoadResult = await loadPlugin<EP_ID>(path.join(candidatePath, packageMetadata.main),
+                        extensionPointId);
 
-                    // check if default export is a function
-                    if (_.isFunction(potentialClass)) {
-
-                        // assume function is a plugin constructor
-                        const PotentialPlugin: Class<Plugin<EP_ID>> = potentialClass as unknown as Class<Plugin<EP_ID>>;
-
-                        // instantiate assumed plugin
-                        const potentialPluginInstance: Plugin<EP_ID> = new PotentialPlugin();
-
-                        // check the assumed plugin has an array of extension descriptors
-                        if (_.isArray(potentialPluginInstance.extensionDescriptors)) {
-
-                            let validPlugin = true;
-                            let validExtensionPoint = false;
-
-                            for (const potentialDescriptor of potentialPluginInstance.extensionDescriptors) {
-
-                                // check it is a descriptor
-                                if (!_.isUndefined(potentialDescriptor.extensionPointId)
-                                    && _.isObject(potentialDescriptor.factory)
-                                    && _.isFunction(potentialDescriptor.factory.create)) {
-
-                                    // it is a valid plugim!
-
-                                    // filter on extension if specified
-                                    if (extensionPointId
-                                        && _.eq(extensionPointId, potentialDescriptor.extensionPointId)) {
-                                        validExtensionPoint = true;
-                                    }
-                                } else {
-                                    validPlugin = false;
-                                    break;
-                                }
-                            }
-                            if (validPlugin && validExtensionPoint) {
-                                yield [candidatePath, potentialPluginInstance];
-                            }
+                    if (pluginLoadResult.isValidPlugin && (_.isUndefined(extensionPointId)
+                        || pluginLoadResult.isValidExtensionPoint)) {
+                        if (!_.isUndefined(pluginLoadResult.instance)) {
+                            yield [candidatePath, pluginLoadResult.instance];
                         }
                     }
                 }
             } catch (err) {
-                // discard error
+                this.log(`Discarding error: ${err}`);
             }
         }
     }
