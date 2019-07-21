@@ -49,7 +49,7 @@
     "devDependencies": {
         "@commitlint/cli": "8.1.0",
         "@commitlint/config-conventional": "8.1.0",
-        "@flowscripter/eslint-config": "1.2.11",
+        "@flowscripter/eslint-config": "1.2.12",
         "@flowscripter/tsconfig": "1.1.1",
         "@types/debug": "4.1.4",
         "@types/jest": "24.0.15",
