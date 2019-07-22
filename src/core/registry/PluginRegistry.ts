@@ -1,8 +1,8 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins
+ * @module @flowscripter/esm-dynamic-plugins-core
  */
 
-import Plugin from '../api/Plugin';
+import Plugin from '../../api/Plugin';
 
 /**
  * Provides a mechanism to register plugins.

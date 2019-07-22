@@ -1,8 +1,8 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins
+ * @module @flowscripter/esm-dynamic-plugins-core
  */
 
-import Plugin from '../api/Plugin';
+import Plugin from '../../api/Plugin';
 import PluginRegistry from './PluginRegistry';
 
 /**
@@ -23,7 +23,6 @@ export default class InMemoryPluginRegistry<P_ID, EP_ID> implements PluginRegist
     public register(pluginId: P_ID, plugin: Plugin<EP_ID>): void {
 
         if (this.isRegistered(pluginId)) {
-
             throw new Error(`Plugin with ID ${pluginId} already registered`);
         }
         this.pluginsById.set(pluginId, plugin);
@@ -46,7 +45,6 @@ export default class InMemoryPluginRegistry<P_ID, EP_ID> implements PluginRegist
         const plugin = this.pluginsById.get(pluginId);
 
         if (!plugin) {
-
             throw new Error(`Plugin with ID ${pluginId} has not been registered`);
         }
         return plugin;

@@ -1,4 +1,4 @@
-import InMemoryExtensionPointRegistry from '../../src/core/InMemoryExtensionPointRegistry';
+import InMemoryExtensionPointRegistry from '../../../src/core/registry/InMemoryExtensionPointRegistry';
 
 describe('InMemoryExtensionPointRegistry test', () => {
 
@@ -7,7 +7,6 @@ describe('InMemoryExtensionPointRegistry test', () => {
     });
 
     it('Extension Point can be registered successfully', () => {
-
         const extensionPointId = 'foo';
         const registry = new InMemoryExtensionPointRegistry<string>();
 
@@ -21,7 +20,6 @@ describe('InMemoryExtensionPointRegistry test', () => {
     });
 
     it('Extension Point cannot be registered twice', () => {
-
         const extensionPointId = 'foo';
         const registry = new InMemoryExtensionPointRegistry<string>();
 
@@ -33,7 +31,6 @@ describe('InMemoryExtensionPointRegistry test', () => {
     });
 
     it('Two extension points can be registered', () => {
-
         const extensionPointIdA = 'foo';
         const extensionPointIdB = 'bar';
         const registry = new InMemoryExtensionPointRegistry<string>();
