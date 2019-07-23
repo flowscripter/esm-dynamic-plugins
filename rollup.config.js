@@ -21,6 +21,11 @@ module.exports = {
     watch: {
         include: 'src/**',
     },
+    external: [
+        'path',
+        'fs',
+        'crypto'
+    ],
     plugins: [
         peerDepsExternal(),
         eslint({
