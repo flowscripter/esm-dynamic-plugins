@@ -50,7 +50,7 @@
         "@commitlint/cli": "8.1.0",
         "@commitlint/config-conventional": "8.1.0",
         "@flowscripter/eslint-config": "1.2.12",
-        "@flowscripter/tsconfig": "1.1.1",
+        "@flowscripter/tsconfig": "1.1.2",
         "@types/debug": "4.1.4",
         "@types/jest": "24.0.15",
         "@types/uuidv4": "2.0.0",
