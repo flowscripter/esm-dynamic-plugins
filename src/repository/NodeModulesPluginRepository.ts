@@ -27,8 +27,8 @@ export default class NodeModulesPluginRepository<EP_ID> extends AbstractPluginRe
      *
      * If the search paths are not specified the default is to search within:
      *
-     * * `process.cwd() + node_modules`
-     * * `process.config.variables.node_prefix + lib/node_modules`
+     * * `<process.cwd()>/node_modules`
+     * * `<process.config.variables.node_prefix>/lib/node_modules`
      *
      * These search paths are expected to include sub-folder package or `@scope` folders containing sub-folder
      * packages. All such folders will be filtered by scope and package (module) name if specified.
@@ -108,7 +108,11 @@ export default class NodeModulesPluginRepository<EP_ID> extends AbstractPluginRe
             });
         })
             .then((dirents: Dirent[]): string[] => this.filterPaths(promises, dirents, folderPath, isScopedFolder,
-                moduleScope, moduleName));
+                moduleScope, moduleName))
+            .catch((err): string[] => {
+                this.log(`Discarding error: ${err}`);
+                return [];
+            });
 
         promises.push(promise);
     }
