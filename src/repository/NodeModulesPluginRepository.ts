@@ -8,7 +8,7 @@ import fs, { Dirent } from 'fs';
 import path from 'path';
 import Plugin from '../api/Plugin';
 import AbstractPluginRepository from './AbstractPluginRepository';
-import { loadPlugin } from './PluginLoader';
+import loadPlugin from './PluginLoader';
 
 /**
  * Implementation of a [[PluginRepository]] which loads modules from a `node_modules` local folder

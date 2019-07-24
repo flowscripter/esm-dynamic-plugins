@@ -33,7 +33,7 @@ export interface PluginLoadResult<EP_ID> {
  *
  * @typeparam EP_ID is the type of the Extension Point IDs used by this plugin manager instance.
  */
-export async function loadPlugin<EP_ID>(specifier: string, extensionPointId?: EP_ID):
+export default async function loadPlugin<EP_ID>(specifier: string, extensionPointId?: EP_ID):
 Promise<PluginLoadResult<EP_ID>> {
 
     const result: PluginLoadResult<EP_ID> = {
