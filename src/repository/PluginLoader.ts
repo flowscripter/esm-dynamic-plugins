@@ -1,10 +1,10 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
 import _ from 'lodash';
 import { Class } from './Class';
-import Plugin from '../../api/Plugin';
+import Plugin from '../api/Plugin';
 
 /**
  * Result of the [[loadPlugin]] function.
@@ -33,7 +33,7 @@ export interface PluginLoadResult<EP_ID> {
  *
  * @typeparam EP_ID is the type of the Extension Point IDs used by this plugin manager instance.
  */
-export async function loadPlugin<EP_ID>(specifier: string, extensionPointId?: EP_ID):
+export default async function loadPlugin<EP_ID>(specifier: string, extensionPointId?: EP_ID):
 Promise<PluginLoadResult<EP_ID>> {
 
     const result: PluginLoadResult<EP_ID> = {

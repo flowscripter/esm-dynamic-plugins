@@ -1,9 +1,9 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
 import BasePluginManager from './BasePluginManager';
-import UrlPluginRepository from './repository/UrlPluginRepository';
+import UrlPluginRepository from '../repository/UrlPluginRepository';
 
 
 /**

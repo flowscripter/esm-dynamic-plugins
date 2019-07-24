@@ -1,12 +1,12 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
 import _ from 'lodash';
 import debug from 'debug';
-import Plugin from '../../api/Plugin';
+import Plugin from '../api/Plugin';
 import AbstractPluginRepository from './AbstractPluginRepository';
-import { loadPlugin } from './PluginLoader';
+import loadPlugin from './PluginLoader';
 
 /**
  * Implementation of a [[PluginRepository]] for URL accessible modules. The URLs to modules should be of the form:

@@ -1,19 +1,19 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 import _ from 'lodash';
 import uuidv4 from 'uuidv4';
 
-import ExtensionPointRegistry from './registry/ExtensionPointRegistry';
-import InMemoryExtensionPointRegistry from './registry/InMemoryExtensionPointRegistry';
-import InMemoryPluginRegistry from './registry/InMemoryPluginRegistry';
+import ExtensionPointRegistry from '../registry/ExtensionPointRegistry';
+import InMemoryExtensionPointRegistry from '../registry/InMemoryExtensionPointRegistry';
+import InMemoryPluginRegistry from '../registry/InMemoryPluginRegistry';
 import Plugin from '../api/Plugin';
 import PluginManager from '../api/PluginManager';
-import PluginRegistry from './registry/PluginRegistry';
-import ExtensionRegistry from './registry/ExtensionRegistry';
-import InMemoryExtensionRegistry from './registry/InMemoryExtensionRegistry';
+import PluginRegistry from '../registry/PluginRegistry';
+import ExtensionRegistry from '../registry/ExtensionRegistry';
+import InMemoryExtensionRegistry from '../registry/InMemoryExtensionRegistry';
 import ExtensionInfo from '../api/ExtensionInfo';
-import PluginRepository from './repository/PluginRepository';
+import PluginRepository from '../repository/PluginRepository';
 
 /**
  * Default implementation of a [[PluginManager]].

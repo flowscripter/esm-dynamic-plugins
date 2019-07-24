@@ -1,12 +1,12 @@
 import Plugin from '../../src/api/Plugin';
-import BasePluginManager from '../../src/core/BasePluginManager';
+import BasePluginManager from '../../src/manager/BasePluginManager';
 import PluginA from '../fixtures/PluginA';
 import PluginB from '../fixtures/PluginB';
 import { EXTENSION_POINT_A_ID } from '../fixtures/ExtensionPointA';
 import { EXTENSION_POINT_B_ID } from '../fixtures/ExtensionPointB';
-import NodeModulesPluginRepository from '../../src/core/repository/NodeModulesPluginRepository';
+import NodeModulesPluginRepository from '../../src/repository/NodeModulesPluginRepository';
 
-jest.mock('../../src/core/repository/NodeModulesPluginRepository');
+jest.mock('../../src/repository/NodeModulesPluginRepository');
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mockedRepository: jest.Mocked<NodeModulesPluginRepository<string>> = new NodeModulesPluginRepository() as any;
 

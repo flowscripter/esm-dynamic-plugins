@@ -1,4 +1,4 @@
-import InMemoryExtensionPointRegistry from '../../../src/core/registry/InMemoryExtensionPointRegistry';
+import InMemoryExtensionPointRegistry from '../../src/registry/InMemoryExtensionPointRegistry';
 
 describe('InMemoryExtensionPointRegistry test', () => {
 

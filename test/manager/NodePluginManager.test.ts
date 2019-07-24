@@ -1,9 +1,9 @@
-import NodePluginManager from '../../src/core/NodePluginManager';
+import NodePluginManager from '../../src/manager/NodePluginManager';
 import PluginA from '../fixtures/PluginA';
 import PluginB from '../fixtures/PluginB';
 import Plugin from '../../src/api/Plugin';
 
-jest.mock('../../src/core/repository/NodeModulesPluginRepository', () => function mock() {
+jest.mock('../../src/repository/NodeModulesPluginRepository', () => function mock() {
     return {
         getPluginsByModuleName: (name: string) => {
             let i = 0;

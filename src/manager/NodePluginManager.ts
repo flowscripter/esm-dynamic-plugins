@@ -1,9 +1,9 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
 import BasePluginManager from './BasePluginManager';
-import NodeModulesPluginRepository from './repository/NodeModulesPluginRepository';
+import NodeModulesPluginRepository from '../repository/NodeModulesPluginRepository';
 
 /**
  * Implementation of a [[PluginManager]] for a Node JS runtime.
@@ -20,8 +20,8 @@ export default class NodePluginManager extends BasePluginManager<string> {
      *
      * If the search paths are not specified the default is to search within:
      *
-     * * `process.cwd() + node_modules`
-     * * `process.config.variables.node_prefix + lib/node_modules`
+     * * `<process.cwd()>/node_modules`
+     * * `<process.config.variables.node_prefix>/lib/node_modules`
      *
      * These search paths are expected to include sub-folder package or `@scope` folders containing sub-folder
      * packages.
