@@ -1,9 +1,9 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
 import BasePluginManager from './BasePluginManager';
-import NodeModulesPluginRepository from './repository/NodeModulesPluginRepository';
+import NodeModulesPluginRepository from '../repository/NodeModulesPluginRepository';
 
 /**
  * Implementation of a [[PluginManager]] for a Node JS runtime.

@@ -1,8 +1,8 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
-import ExtensionDescriptor from '../../api/ExtensionDescriptor';
+import ExtensionDescriptor from '../api/ExtensionDescriptor';
 
 /**
  * Provides a mechanism to register extensions.

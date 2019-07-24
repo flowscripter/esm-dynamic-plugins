@@ -1,6 +1,6 @@
-import InMemoryPluginRegistry from '../../../src/core/registry/InMemoryPluginRegistry';
-import PluginA from '../../fixtures/PluginA';
-import PluginB from '../../fixtures/PluginB';
+import InMemoryPluginRegistry from '../../src/registry/InMemoryPluginRegistry';
+import PluginA from '../fixtures/PluginA';
+import PluginB from '../fixtures/PluginB';
 
 describe('InMemoryPluginRegistry test', () => {
 

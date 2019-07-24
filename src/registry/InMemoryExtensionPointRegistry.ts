@@ -1,5 +1,5 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
 import ExtensionPointRegistry from './ExtensionPointRegistry';

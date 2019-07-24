@@ -1,9 +1,9 @@
 import fs, { Dirent, PathLike } from 'fs';
-import NodeModulesPluginRepository from '../../../src/core/repository/NodeModulesPluginRepository';
-import * as PluginLoader from '../../../src/core/repository/PluginLoader';
-import PluginA from '../../fixtures/PluginA';
+import NodeModulesPluginRepository from '../../src/repository/NodeModulesPluginRepository';
+import * as PluginLoader from '../../src/repository/PluginLoader';
+import PluginA from '../fixtures/PluginA';
 
-jest.mock('../../../src/core/repository/PluginLoader');
+jest.mock('../../src/repository/PluginLoader');
 const MockedPluginLoader = PluginLoader as jest.Mocked<typeof PluginLoader>;
 
 jest.mock('fs');

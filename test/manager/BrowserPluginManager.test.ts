@@ -1,9 +1,9 @@
-import BrowserPluginManager from '../../src/core/BrowserPluginManager';
+import BrowserPluginManager from '../../src/manager/BrowserPluginManager';
 import PluginA from '../fixtures/PluginA';
 import PluginB from '../fixtures/PluginB';
 import Plugin from '../../src/api/Plugin';
 
-jest.mock('../../src/core/repository/UrlPluginRepository', () => function mock() {
+jest.mock('../../src/repository/UrlPluginRepository', () => function mock() {
     return {
         getPluginsByModuleName: (name: string) => {
             let i = 0;

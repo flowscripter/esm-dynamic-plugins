@@ -1,8 +1,8 @@
-import InMemoryExtensionRegistry from '../../../src/core/registry/InMemoryExtensionRegistry';
-import { EXTENSION_POINT_A_ID } from '../../fixtures/ExtensionPointA';
-import { EXTENSION_POINT_B_ID } from '../../fixtures/ExtensionPointB';
-import PluginA from '../../fixtures/PluginA';
-import PluginB from '../../fixtures/PluginB';
+import InMemoryExtensionRegistry from '../../src/registry/InMemoryExtensionRegistry';
+import { EXTENSION_POINT_A_ID } from '../fixtures/ExtensionPointA';
+import { EXTENSION_POINT_B_ID } from '../fixtures/ExtensionPointB';
+import PluginA from '../fixtures/PluginA';
+import PluginB from '../fixtures/PluginB';
 
 describe('InMemoryExtensionRegistry test', () => {
 

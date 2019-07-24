@@ -1,12 +1,12 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
 import _ from 'lodash';
 import debug from 'debug';
 import fs, { Dirent } from 'fs';
 import path from 'path';
-import Plugin from '../../api/Plugin';
+import Plugin from '../api/Plugin';
 import AbstractPluginRepository from './AbstractPluginRepository';
 import { loadPlugin } from './PluginLoader';
 

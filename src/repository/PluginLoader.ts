@@ -1,10 +1,10 @@
 /**
- * @module @flowscripter/esm-dynamic-plugins-core
+ * @module @flowscripter/esm-dynamic-plugins
  */
 
 import _ from 'lodash';
 import { Class } from './Class';
-import Plugin from '../../api/Plugin';
+import Plugin from '../api/Plugin';
 
 /**
  * Result of the [[loadPlugin]] function.

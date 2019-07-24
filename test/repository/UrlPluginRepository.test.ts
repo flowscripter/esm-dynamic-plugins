@@ -1,8 +1,8 @@
-import * as PluginLoader from '../../../src/core/repository/PluginLoader';
-import UrlPluginRepository from '../../../src/core/repository/UrlPluginRepository';
-import PluginA from '../../fixtures/PluginA';
+import * as PluginLoader from '../../src/repository/PluginLoader';
+import UrlPluginRepository from '../../src/repository/UrlPluginRepository';
+import PluginA from '../fixtures/PluginA';
 
-jest.mock('../../../src/core/repository/PluginLoader');
+jest.mock('../../src/repository/PluginLoader');
 const MockedPluginLoader = PluginLoader as jest.Mocked<typeof PluginLoader>;
 
 const moduleUrls = [
