@@ -1,9 +1,16 @@
-import * as PluginLoader from '../../src/repository/PluginLoader';
+import { PluginLoadResult } from '../../src/repository/PluginLoader';
 import UrlPluginRepository from '../../src/repository/UrlPluginRepository';
 import PluginA from '../fixtures/PluginA';
 
-jest.mock('../../src/repository/PluginLoader');
-const MockedPluginLoader = PluginLoader as jest.Mocked<typeof PluginLoader>;
+jest.mock('../../src/repository/PluginLoader', () => (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    jest.fn().mockImplementation(async (specifier: string, extensionPointId?: unknown):
+    Promise<PluginLoadResult<unknown>> => ({
+        isValidPlugin: true,
+        isValidExtensionPoint: true,
+        instance: new PluginA()
+    }))
+));
 
 const moduleUrls = [
     'https://foo.com/@fooscope/foobar',
@@ -18,18 +25,7 @@ const moduleUrls = [
     'https://foo.com/bar'
 ];
 
-
 describe('UrlPluginRepository test', () => {
-
-    beforeAll(() => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        MockedPluginLoader.loadPlugin.mockImplementation(async (specifier: string, extensionPointId?: unknown):
-        Promise<PluginLoader.PluginLoadResult<unknown>> => ({
-            isValidPlugin: true,
-            isValidExtensionPoint: true,
-            instance: new PluginA()
-        }));
-    });
 
     it('UrlPluginRepository is instantiable', () => {
         expect(new UrlPluginRepository<string>(['foo'])).toBeInstanceOf(UrlPluginRepository);

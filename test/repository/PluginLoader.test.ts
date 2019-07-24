@@ -1,4 +1,4 @@
-import { loadPlugin } from '../../src/repository/PluginLoader';
+import loadPlugin from '../../src/repository/PluginLoader';
 
 // NOTE: This function is difficult to test due to its use of dynamic import()
 

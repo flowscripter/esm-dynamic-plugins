@@ -1,10 +1,17 @@
 import fs, { Dirent, PathLike } from 'fs';
 import NodeModulesPluginRepository from '../../src/repository/NodeModulesPluginRepository';
-import * as PluginLoader from '../../src/repository/PluginLoader';
+import { PluginLoadResult } from '../../src/repository/PluginLoader';
 import PluginA from '../fixtures/PluginA';
 
-jest.mock('../../src/repository/PluginLoader');
-const MockedPluginLoader = PluginLoader as jest.Mocked<typeof PluginLoader>;
+jest.mock('../../src/repository/PluginLoader', () => (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    jest.fn().mockImplementation(async (specifier: string, extensionPointId?: unknown):
+    Promise<PluginLoadResult<unknown>> => ({
+        isValidPlugin: true,
+        isValidExtensionPoint: true,
+        instance: new PluginA()
+    }))
+));
 
 jest.mock('fs');
 const mockedFs = fs as jest.Mocked<typeof fs>;
@@ -31,15 +38,6 @@ class MockDirent extends Dirent {
 describe('NodeModulesPluginRepository test', () => {
 
     beforeAll(() => {
-
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        MockedPluginLoader.loadPlugin.mockImplementation(async (specifier: string, extensionPointId?: unknown):
-        Promise<PluginLoader.PluginLoadResult<unknown>> => ({
-            isValidPlugin: true,
-            isValidExtensionPoint: true,
-            instance: new PluginA()
-        }));
-
         mockedFs.readFile.mockImplementation((filePath: PathLike | number, callback:
         (err: NodeJS.ErrnoException, data: Buffer) => void) => {
 
