@@ -3,8 +3,11 @@
  */
 
 import _ from 'lodash';
+import debug from 'debug';
 import { Class } from './Class';
 import Plugin from '../api/Plugin';
+
+const log: debug.Debugger = debug('loadPlugin');
 
 /**
  * Result of the [[loadPlugin]] function.
@@ -42,7 +45,15 @@ Promise<PluginLoadResult<EP_ID>> {
         instance: undefined
     };
 
-    const potentialClass: unknown = await import(specifier);
+    let module;
+    try {
+        module = await import(specifier);
+    } catch (err) {
+        log(`Discarding error: ${err}`);
+        return result;
+    }
+
+    const potentialClass = module.default;
 
     // check if default export is a function
     if (!_.isFunction(potentialClass)) {

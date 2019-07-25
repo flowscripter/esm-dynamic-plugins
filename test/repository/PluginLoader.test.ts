@@ -5,7 +5,7 @@ import loadPlugin from '../../src/repository/PluginLoader';
 describe('PluginLoader test', () => {
 
     it('Invalid specifier returns not valid plugin', async () => {
-        const result = await loadPlugin('');
+        const result = await loadPlugin('foo');
 
         expect(result.isValidPlugin).toEqual(false);
         expect(result.isValidExtensionPoint).toEqual(false);
