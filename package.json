@@ -70,7 +70,7 @@
         "rollup-plugin-json": "4.0.0",
         "rollup-plugin-node-resolve": "5.2.0",
         "rollup-plugin-peer-deps-external": "2.2.0",
-        "rollup-plugin-typescript2": "0.22.0",
+        "rollup-plugin-typescript2": "0.22.1",
         "rollup-watch": "4.3.1",
         "semantic-release": "15.13.18",
         "sonarqube-scanner": "2.5.0",
