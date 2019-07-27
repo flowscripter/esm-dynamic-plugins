@@ -71,6 +71,8 @@ Promise<PluginLoadResult<EP_ID>> {
         return result;
     }
 
+    // At this point assume it is a valid plugin and then disprove this
+    result.isValidPlugin = true;
     for (const potentialDescriptor of potentialPluginInstance.extensionDescriptors) {
 
         // check it is a valid descriptor
@@ -86,6 +88,7 @@ Promise<PluginLoadResult<EP_ID>> {
             result.isValidExtensionPoint = true;
         }
     }
+    result.isValidExtensionPoint = result.isValidExtensionPoint && result.isValidPlugin;
     if (result.isValidPlugin) {
         result.instance = potentialPluginInstance;
     }
