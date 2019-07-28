@@ -2,7 +2,7 @@
  * @module @flowscripter/esm-dynamic-plugins
  */
 import _ from 'lodash';
-import uuidv4 from 'uuidv4';
+import nanoid from 'nanoid';
 
 import ExtensionPointRegistry from '../registry/ExtensionPointRegistry';
 import InMemoryExtensionPointRegistry from '../registry/InMemoryExtensionPointRegistry';
@@ -18,7 +18,7 @@ import PluginRepository from '../repository/PluginRepository';
 /**
  * Default implementation of a [[PluginManager]].
  *
- * Internally, string UUIDs are used to uniquely identify each registered Plugin and to assign a handle to each
+ * Internally, string IDs are used to uniquely identify each registered Plugin and to assign a handle to each
  * registered Extension.
  *
  * @typeparam EP_ID is the type of the Extension Point IDs to be used by this [[PluginManager]] instance.
@@ -83,7 +83,7 @@ export default class BasePluginManager<EP_ID> implements PluginManager<EP_ID> {
             const { extensionPointId } = extensionDescriptor;
 
             if (this.extensionPointRegistry.isRegistered(extensionPointId)) {
-                this.extensionRegistry.register(uuidv4(), pluginId, extensionDescriptor);
+                this.extensionRegistry.register(nanoid(), pluginId, extensionDescriptor);
             }
         });
     }
