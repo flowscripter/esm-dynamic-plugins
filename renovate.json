@@ -1,7 +1,5 @@
 {
     "extends": [
-        "config:base",
-        "default:automergePatch",
-        "default:automergeMinor"
+        "@flowscripter"
     ]
 }

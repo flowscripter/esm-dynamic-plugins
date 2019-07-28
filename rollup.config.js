@@ -74,7 +74,9 @@ module.exports = [
                 browser: true,
                 preferBuiltins: false
             }),
-            cleanup({ extensions: ['ts'] })
+            cleanup({
+                extensions: ['ts']
+            })
         ]
     }
 ];
