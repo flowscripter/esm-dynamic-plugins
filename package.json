@@ -29,7 +29,8 @@
     "publishConfig": {
         "access": "public"
     },
-    "main": "dist/index.js",
+    "main": "dist/NodePluginManager.js",
+    "browser": "dist/BrowserPluginManager.js",
     "type": "module",
     "files": [
         "dist/**/*"
@@ -69,6 +70,7 @@
         "rollup-plugin-commonjs": "10.0.1",
         "rollup-plugin-eslint": "7.0.0",
         "rollup-plugin-json": "4.0.0",
+        "rollup-plugin-node-builtins": "2.1.2",
         "rollup-plugin-node-resolve": "5.2.0",
         "rollup-plugin-peer-deps-external": "2.2.0",
         "rollup-plugin-typescript2": "0.22.1",
