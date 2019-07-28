@@ -83,14 +83,10 @@ The following diagram provides an overview of the main classes:
 
 The build config in `rollup.config.js` produces two bundled entry points:
  
-* `NodePluginManager.js` is intended for consumption in node and exposed via the `main` property in `package.json`.
-* `BrowserPluginManager.js` - is intended for consumption in a browser and exposed via the `browser` property in `package.json`.
+* `node.js` is intended for consumption in node and exposed via the `main` property in `package.json`.
+* `browser.js` - is intended for consumption in a browser and exposed via the `browser` property in `package.json`.
 
 This ensures that dependencies for node specific modules can be shimmed via [rollup-plugin-node-builtins](https://github.com/calvinmetcalf/rollup-plugin-node-builtins)  
-
-Note that the API used to both implement plugins and new `PluginManager` implementations only exists as Typescript type definitions
-and these are exposed via the `types` property in `package.json`. As the API is pure Typescript interface there is no equivalent
-to be exposed for Javascript.
 
 #### No Legacy JavaScript Support
 

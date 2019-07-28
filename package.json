@@ -29,8 +29,8 @@
     "publishConfig": {
         "access": "public"
     },
-    "main": "dist/NodePluginManager.js",
-    "browser": "dist/BrowserPluginManager.js",
+    "main": "dist/node.js",
+    "browser": "dist/browser.js",
     "type": "module",
     "files": [
         "dist/**/*"
