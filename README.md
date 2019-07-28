@@ -49,6 +49,15 @@ possible to bypass the framework altogether and import an *Extension* and use it
  
 ![Direct Instantiation Sequence Diagram](images/direct_instantiation_sequence_diagram.png "Direct Instantiation Sequence Diagram")
 
+## Examples
+
+The following example projects are available which all support execution in NodeJS and a browser:
+
+* [Typescript based host application](https://github.com/flowscripter/ts-example-host-app)
+* [Typescript based plugin](https://github.com/flowscripter/ts-example-plugin)
+* [Javascript based host application](https://github.com/flowscripter/js-example-host-app)
+* [Javascript based plugin](https://github.com/flowscripter/js-example-plugin)
+
 ## API
 
 [API documentation](https://flowscripter.github.io/esm-dynamic-plugins)
@@ -121,6 +130,17 @@ Explanation of project configuration files:
 * `rollup.config.js` - Defines the TypeScript and ES2015 module build pipeline for [Rollup](https://rollupjs.org/guide/en)
 * `tsconfig.json` - [TypeScript](https://www.typescriptlang.org) configuration for the project derived from [@flowscripter/tsconfig](https://www.npmjs.com/package/@flowscripter/tsconfig)
 
+#### rollup-plugin-node-globals workaround
+
+Until [this PR](https://github.com/calvinmetcalf/rollup-plugin-node-globals/pull/15) is merged, the 
+`rollup-plugin-node-globals`dependency is sourced from https://github.com/vectronic/rollup-plugin-node-globals 
+
+## Alternatives
+
+* [js-plugins](https://github.com/easeway/js-plugins) - also provides a plugin framework following Eclipse Project's framework. Relies on plugin declarations in `package.json` instead of Typescript interfaces.
+Does not support browser or ES2015 modules.
+* [oclif plugins](https://oclif.io/docs/plugins) - very much tied to the Oclif CLI. Relies on available plugins being declared in `package.json`. Does not support browser or ES2015 modules. 
+  
 ## License
 
 MIT © Vectronic

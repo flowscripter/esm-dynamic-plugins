@@ -2,6 +2,7 @@ import builtins from 'rollup-plugin-node-builtins';
 import cleanup from 'rollup-plugin-cleanup';
 import commonjs from 'rollup-plugin-commonjs';
 import { eslint } from 'rollup-plugin-eslint';
+import globals from 'rollup-plugin-node-globals';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import resolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
@@ -39,7 +40,9 @@ module.exports = [
                 cacheRoot: `${tempDir}/.rpt2_cache`
             }),
             commonjs(),
-            resolve(),
+            resolve({
+                preferBuiltins: true
+            }),
             cleanup({
                 extensions: ['ts']
             })
@@ -70,6 +73,7 @@ module.exports = [
             }),
             commonjs(),
             builtins(),
+            globals(),
             resolve({
                 browser: true,
                 preferBuiltins: false
