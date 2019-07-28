@@ -11,7 +11,7 @@ import tempDir from 'temp-dir';
 module.exports = [
     {
         input: {
-            NodePluginManager: 'src/manager/NodePluginManager.ts',
+            node: 'src/index.ts'
         },
         output: {
             dir: 'dist',
@@ -47,7 +47,7 @@ module.exports = [
     },
     {
         input: {
-            BrowserPluginManager: 'src/manager/BrowserPluginManager.ts'
+            browser: 'src/index.ts'
         },
         output: {
             dir: 'dist',
