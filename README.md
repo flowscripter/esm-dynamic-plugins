@@ -53,10 +53,10 @@ possible to bypass the framework altogether and import an *Extension* and use it
 
 The following example projects are available which all support execution in NodeJS and a browser:
 
-* [Typescript based host application](https://github.com/flowscripter/ts-example-host-app)
-* [Typescript based plugin](https://github.com/flowscripter/ts-example-plugin)
-* [Javascript based host application](https://github.com/flowscripter/js-example-host-app)
-* [Javascript based plugin](https://github.com/flowscripter/js-example-plugin)
+* [TypeScript based host application](https://github.com/flowscripter/ts-example-host-app)
+* [TypeScript based plugin](https://github.com/flowscripter/ts-example-plugin)
+* [JavaScript based host application](https://github.com/flowscripter/js-example-host-app)
+* [JavaScript based plugin](https://github.com/flowscripter/js-example-plugin)
 
 ## API
 
@@ -69,8 +69,8 @@ Firstly:
 ```
 npm install
 ```
-
-then:
+Note: The warnings regarding peer dependencies are caused by dependencies or sub-dependencies which have yet to 
+update their peer-dependencies. They can safely be ignored. 
 
 Build: `npm run build`
 
