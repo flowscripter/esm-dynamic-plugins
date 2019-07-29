@@ -69,8 +69,8 @@ Firstly:
 ```
 npm install
 ```
-
-then:
+Note: The warnings regarding peer dependencies are caused by dependencies or sub-dependencies which have yet to 
+update their peer-dependencies. They can safely be ignored. 
 
 Build: `npm run build`
 
