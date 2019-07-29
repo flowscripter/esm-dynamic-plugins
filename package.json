@@ -84,10 +84,8 @@
         "typedoc-plugin-external-module-name": "2.1.0",
         "typescript": "3.5.3"
     },
-    "peerDependencies": {
-        "debug": "^4.1.1"
-    },
     "dependencies": {
+        "debug": "^4.1.1",
         "lodash": "4.17.15",
         "nanoid": "2.0.3"
     }
