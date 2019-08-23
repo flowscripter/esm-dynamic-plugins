@@ -74,7 +74,7 @@
         "rollup-plugin-node-globals": "git+https://github.com/vectronic/rollup-plugin-node-globals.git",
         "rollup-plugin-node-resolve": "5.2.0",
         "rollup-plugin-peer-deps-external": "2.2.0",
-        "rollup-plugin-typescript2": "0.22.1",
+        "rollup-plugin-typescript2": "0.23.0",
         "rollup-watch": "4.3.1",
         "semantic-release": "15.13.24",
         "sonarqube-scanner": "2.5.0",
