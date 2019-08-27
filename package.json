@@ -68,7 +68,7 @@
         "rimraf": "2.7.1",
         "rollup": "1.20.2",
         "rollup-plugin-cleanup": "3.1.1",
-        "rollup-plugin-commonjs": "10.0.2",
+        "rollup-plugin-commonjs": "10.1.0",
         "rollup-plugin-eslint": "7.0.0",
         "rollup-plugin-node-builtins": "2.1.2",
         "rollup-plugin-node-globals": "git+https://github.com/vectronic/rollup-plugin-node-globals.git",
