@@ -35,11 +35,11 @@ jest.mock('../../src/repository/NodeModulesPluginRepository', () => function moc
 
 describe('NodePluginManager test', () => {
 
-    it('NodePluginManager is instantiable', () => {
+    test('NodePluginManager is instantiable', () => {
         expect(new NodePluginManager()).toBeInstanceOf(NodePluginManager);
     });
 
-    it('Plugin can be registered successfully', async () => {
+    test('Plugin can be registered successfully', async () => {
         const manager = new NodePluginManager();
 
         expect(Array.from(manager.getRegisteredPlugins())).toHaveLength(0);

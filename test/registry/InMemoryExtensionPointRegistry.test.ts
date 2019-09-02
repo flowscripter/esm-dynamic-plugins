@@ -2,11 +2,11 @@ import InMemoryExtensionPointRegistry from '../../src/registry/InMemoryExtension
 
 describe('InMemoryExtensionPointRegistry test', () => {
 
-    it('InMemoryExtensionPointRegistry is instantiable', () => {
+    test('InMemoryExtensionPointRegistry is instantiable', () => {
         expect(new InMemoryExtensionPointRegistry<string>()).toBeInstanceOf(InMemoryExtensionPointRegistry);
     });
 
-    it('Extension Point can be registered successfully', () => {
+    test('Extension Point can be registered successfully', () => {
         const extensionPointId = 'foo';
         const registry = new InMemoryExtensionPointRegistry<string>();
 
@@ -19,7 +19,7 @@ describe('InMemoryExtensionPointRegistry test', () => {
         expect(registry.isRegistered(extensionPointId)).toBe(true);
     });
 
-    it('Extension Point cannot be registered twice', () => {
+    test('Extension Point cannot be registered twice', () => {
         const extensionPointId = 'foo';
         const registry = new InMemoryExtensionPointRegistry<string>();
 
@@ -30,7 +30,7 @@ describe('InMemoryExtensionPointRegistry test', () => {
         }).toThrow();
     });
 
-    it('Two extension points can be registered', () => {
+    test('Two extension points can be registered', () => {
         const extensionPointIdA = 'foo';
         const extensionPointIdB = 'bar';
         const registry = new InMemoryExtensionPointRegistry<string>();

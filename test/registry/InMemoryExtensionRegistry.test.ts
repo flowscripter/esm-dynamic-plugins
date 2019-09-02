@@ -6,11 +6,11 @@ import PluginB from '../fixtures/PluginB';
 
 describe('InMemoryExtensionRegistry test', () => {
 
-    it('InMemoryExtensionRegistry is instantiable', () => {
+    test('InMemoryExtensionRegistry is instantiable', () => {
         expect(new InMemoryExtensionRegistry<string, string, string>()).toBeInstanceOf(InMemoryExtensionRegistry);
     });
 
-    it('Extension is registered', () => {
+    test('Extension is registered', () => {
         const pluginId = 'foo';
         const extensionHandle = 'handle';
         const pluginA = new PluginA();
@@ -23,7 +23,7 @@ describe('InMemoryExtensionRegistry test', () => {
         expect(registry.isRegistered(extensionHandle)).toBeTruthy();
     });
 
-    it('Extension cannot be registered twice', () => {
+    test('Extension cannot be registered twice', () => {
         const pluginId = 'foo';
         const extensionHandle = 'handle';
         const pluginA = new PluginA();
@@ -36,7 +36,7 @@ describe('InMemoryExtensionRegistry test', () => {
         }).toThrow();
     });
 
-    it('Unknown extension cannot be retrieved', () => {
+    test('Unknown extension cannot be retrieved', () => {
         const extensionHandle = 'handle';
         const registry = new InMemoryExtensionRegistry<string, string, string>();
 
@@ -45,7 +45,7 @@ describe('InMemoryExtensionRegistry test', () => {
         }).toThrow();
     });
 
-    it('Extension can be retrieved', () => {
+    test('Extension can be retrieved', () => {
         const pluginId = 'foo';
         const extensionHandle = 'handle';
         const pluginA = new PluginA();
@@ -58,7 +58,7 @@ describe('InMemoryExtensionRegistry test', () => {
         expect(Array.from(registry.getExtensions(EXTENSION_POINT_A_ID))).toHaveLength(1);
     });
 
-    it('Extensions for same Extension Point across two Plugins can be retrieved', () => {
+    test('Extensions for same Extension Point across two Plugins can be retrieved', () => {
         const pluginIdA = 'foo';
         const pluginIdB = 'bar';
         const extensionHandle1 = 'handle1';
@@ -73,7 +73,7 @@ describe('InMemoryExtensionRegistry test', () => {
         expect(Array.from(registry.getExtensions(EXTENSION_POINT_A_ID))).toHaveLength(2);
     });
 
-    it('Extensions for two Extension Points across two Plugins can be retrieved', () => {
+    test('Extensions for two Extension Points across two Plugins can be retrieved', () => {
         const pluginIdA = 'foo';
         const pluginIdB = 'bar';
         const extensionHandle1 = 'handle1';
@@ -92,7 +92,7 @@ describe('InMemoryExtensionRegistry test', () => {
         expect(Array.from(registry.getAll())).toHaveLength(3);
     });
 
-    it('Extensions for unknown Extension Point returns empty', () => {
+    test('Extensions for unknown Extension Point returns empty', () => {
         const pluginIdA = 'foo';
         const extensionHandle1 = 'handle1';
         const pluginA = new PluginA();

@@ -35,11 +35,11 @@ jest.mock('../../src/repository/UrlPluginRepository', () => function mock() {
 
 describe('BrowserPluginManager test', () => {
 
-    it('BrowserPluginManager is instantiable', () => {
+    test('BrowserPluginManager is instantiable', () => {
         expect(new BrowserPluginManager(['https://foo.com/bar'])).toBeInstanceOf(BrowserPluginManager);
     });
 
-    it('Plugin can be registered successfully', async () => {
+    test('Plugin can be registered successfully', async () => {
         const manager = new BrowserPluginManager(['https://foo.com/bar']);
 
         expect(Array.from(manager.getRegisteredPlugins())).toHaveLength(0);
