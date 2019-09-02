@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import ExtensionFactory from '../../src/api/ExtensionFactory';
 import ExtensionDescriptor from '../../src/api/ExtensionDescriptor';
 import Plugin from '../../src/api/Plugin';
@@ -6,7 +7,7 @@ import { ExtensionDescriptorA } from './PluginA';
 
 class ExtensionB implements ExtensionPointB {
 
-    // eslint-disable-next-line class-methods-use-this
+    // eslint-disable-next-line class-methods-use-this,@typescript-eslint/no-empty-function
     public sayGoodbye(): void {
     }
 }
