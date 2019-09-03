@@ -4,11 +4,11 @@ import PluginB from '../fixtures/PluginB';
 
 describe('InMemoryPluginRegistry test', () => {
 
-    it('InMemoryPluginRegistry is instantiable', () => {
+    test('InMemoryPluginRegistry is instantiable', () => {
         expect(new InMemoryPluginRegistry<string, string>()).toBeInstanceOf(InMemoryPluginRegistry);
     });
 
-    it('Plugin can be registered successfully', () => {
+    test('Plugin can be registered successfully', () => {
         const pluginId = 'foo';
         const registry = new InMemoryPluginRegistry<string, string>();
 
@@ -21,7 +21,7 @@ describe('InMemoryPluginRegistry test', () => {
         expect(registry.isRegistered(pluginId)).toBe(true);
     });
 
-    it('Plugin cannot be re-registered with same ID', () => {
+    test('Plugin cannot be re-registered with same ID', () => {
         const pluginId = 'foo';
         const registry = new InMemoryPluginRegistry<string, string>();
 
@@ -32,7 +32,7 @@ describe('InMemoryPluginRegistry test', () => {
         }).toThrow();
     });
 
-    it('Plugin can be registered twice with different IDs although this is not recommended', () => {
+    test('Plugin can be registered twice with different IDs although this is not recommended', () => {
         const pluginIdA1 = 'foo';
         const pluginIdA2 = 'bar';
         const pluginA = new PluginA();
@@ -49,7 +49,7 @@ describe('InMemoryPluginRegistry test', () => {
         expect(registry.isRegistered(pluginIdA2)).toBe(true);
     });
 
-    it('Two plugins can be registered', () => {
+    test('Two plugins can be registered', () => {
         const pluginIdA = 'foo';
         const pluginIdB = 'bar';
         const pluginA = new PluginA();

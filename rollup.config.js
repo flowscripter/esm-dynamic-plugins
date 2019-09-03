@@ -23,9 +23,12 @@ module.exports = [
             include: 'src/**',
         },
         external: [
-            'path',
+            'crypto',
             'fs',
-            'crypto'
+            'os',
+            'path',
+            'tty',
+            'util'
         ],
         plugins: [
             peerDepsExternal(),

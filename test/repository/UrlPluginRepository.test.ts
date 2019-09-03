@@ -27,11 +27,11 @@ const moduleUrls = [
 
 describe('UrlPluginRepository test', () => {
 
-    it('UrlPluginRepository is instantiable', () => {
+    test('UrlPluginRepository is instantiable', () => {
         expect(new UrlPluginRepository<string>(['foo'])).toBeInstanceOf(UrlPluginRepository);
     });
 
-    it('Invalid URL throws error', async () => {
+    test('Invalid URL throws error', async () => {
         const repository = new UrlPluginRepository<string>(['root']);
 
         let threw = false;
@@ -47,7 +47,7 @@ describe('UrlPluginRepository test', () => {
         expect(threw).toBe(true);
     });
 
-    it('Get all plugins works', async () => {
+    test('Get all plugins works', async () => {
         const repository = new UrlPluginRepository<string>(moduleUrls);
 
         const pluginIds = [];
@@ -59,7 +59,7 @@ describe('UrlPluginRepository test', () => {
         expect(pluginIds).toHaveLength(10);
     });
 
-    it('Get plugins by module scope works', async () => {
+    test('Get plugins by module scope works', async () => {
         const repository = new UrlPluginRepository<string>(moduleUrls);
 
         const pluginIds = [];
@@ -71,7 +71,7 @@ describe('UrlPluginRepository test', () => {
         expect(pluginIds).toHaveLength(4);
     });
 
-    it('Get plugins by module name works', async () => {
+    test('Get plugins by module name works', async () => {
         const repository = new UrlPluginRepository<string>(moduleUrls);
 
         const pluginIds = [];
@@ -83,7 +83,7 @@ describe('UrlPluginRepository test', () => {
         expect(pluginIds).toHaveLength(3);
     });
 
-    it('Get plugins by module name and scope works', async () => {
+    test('Get plugins by module name and scope works', async () => {
         const repository = new UrlPluginRepository<string>(moduleUrls);
 
         const pluginIds = [];

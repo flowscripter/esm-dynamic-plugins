@@ -113,11 +113,11 @@ describe('NodeModulesPluginRepository test', () => {
         mockedFs.readdir.mockClear();
     });
 
-    it('NodeModulesPluginRepository is instantiable', () => {
+    test('NodeModulesPluginRepository is instantiable', () => {
         expect(new NodeModulesPluginRepository<string>()).toBeInstanceOf(NodeModulesPluginRepository);
     });
 
-    it('Get all plugins works', async () => {
+    test('Get all plugins works', async () => {
         const repository = new NodeModulesPluginRepository<string>(['root']);
 
         const pluginIds = [];
@@ -131,7 +131,7 @@ describe('NodeModulesPluginRepository test', () => {
         expect(mockedFs.readFile).toBeCalledTimes(10);
     });
 
-    it('Get plugins by module scope works', async () => {
+    test('Get plugins by module scope works', async () => {
         const repository = new NodeModulesPluginRepository<string>(['root']);
 
         const pluginIds = [];
@@ -145,7 +145,7 @@ describe('NodeModulesPluginRepository test', () => {
         expect(mockedFs.readFile).toBeCalledTimes(4);
     });
 
-    it('Get plugins by module name works', async () => {
+    test('Get plugins by module name works', async () => {
         const repository = new NodeModulesPluginRepository<string>(['root']);
 
         const pluginIds = [];
@@ -159,7 +159,7 @@ describe('NodeModulesPluginRepository test', () => {
         expect(mockedFs.readFile).toBeCalledTimes(3);
     });
 
-    it('Get plugins by module name and scope works', async () => {
+    test('Get plugins by module name and scope works', async () => {
         const repository = new NodeModulesPluginRepository<string>(['root']);
 
         const pluginIds = [];

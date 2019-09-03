@@ -45,12 +45,12 @@ describe('BasePluginManager test', () => {
         mockedRepository.getPluginsByModuleName.mockClear();
     });
 
-    it('BasePluginManager is instantiable', () => {
+    test('BasePluginManager is instantiable', () => {
         expect(new BasePluginManager<string>(new NodeModulesPluginRepository<string>()))
             .toBeInstanceOf(BasePluginManager);
     });
 
-    it('Extension Point can be registered successfully', () => {
+    test('Extension Point can be registered successfully', () => {
         const manager = new BasePluginManager<string>(new NodeModulesPluginRepository<string>());
 
         expect(Array.from(manager.getRegisteredExtensionPoints())).toHaveLength(0);
@@ -60,7 +60,7 @@ describe('BasePluginManager test', () => {
         expect(Array.from(manager.getRegisteredExtensionPoints())).toHaveLength(1);
     });
 
-    it('Extension Point cannot be registered twice', () => {
+    test('Extension Point cannot be registered twice', () => {
         const manager = new BasePluginManager<string>(new NodeModulesPluginRepository<string>());
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -70,7 +70,7 @@ describe('BasePluginManager test', () => {
         }).toThrow();
     });
 
-    it('Two extension points can be registered', () => {
+    test('Two extension points can be registered', () => {
         const manager = new BasePluginManager<string>(new NodeModulesPluginRepository<string>());
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -82,7 +82,7 @@ describe('BasePluginManager test', () => {
         expect(Array.from(manager.getRegisteredExtensionPoints())).toHaveLength(2);
     });
 
-    it('Plugin can be registered successfully', async () => {
+    test('Plugin can be registered successfully', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         expect(Array.from(manager.getRegisteredPlugins())).toHaveLength(0);
@@ -91,7 +91,7 @@ describe('BasePluginManager test', () => {
         expect(mockedRepository.getPluginsByModuleName).toBeCalledTimes(1);
     });
 
-    it('Plugin is not re-registered', async () => {
+    test('Plugin is not re-registered', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         expect(await manager.registerPluginsByModuleName('PluginA')).toEqual(1);
@@ -100,7 +100,7 @@ describe('BasePluginManager test', () => {
         expect(mockedRepository.getPluginsByModuleName).toBeCalledTimes(2);
     });
 
-    it('Two plugins can be registered', async () => {
+    test('Two plugins can be registered', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -112,7 +112,7 @@ describe('BasePluginManager test', () => {
         expect(mockedRepository.getPluginsByModuleName).toBeCalledTimes(2);
     });
 
-    it('Extension Details can be retrieved', async () => {
+    test('Extension Details can be retrieved', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -122,7 +122,7 @@ describe('BasePluginManager test', () => {
         expect(Array.from(manager.getExtensions(EXTENSION_POINT_A_ID))).toHaveLength(1);
     });
 
-    it('Extension Details for same Extension Point across two Plugins can be retrieved', async () => {
+    test('Extension Details for same Extension Point across two Plugins can be retrieved', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -133,7 +133,7 @@ describe('BasePluginManager test', () => {
         expect(Array.from(manager.getExtensions(EXTENSION_POINT_A_ID))).toHaveLength(2);
     });
 
-    it('Extension Details for two Extension Points across two Plugins can be retrieved', async () => {
+    test('Extension Details for two Extension Points across two Plugins can be retrieved', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -147,7 +147,7 @@ describe('BasePluginManager test', () => {
         expect(Array.from(manager.getExtensions(EXTENSION_POINT_B_ID))).toHaveLength(1);
     });
 
-    it('Extension Details returned with plugin and extension data', async () => {
+    test('Extension Details returned with plugin and extension data', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -160,7 +160,7 @@ describe('BasePluginManager test', () => {
         expect(extensionDetails.pluginData).not.toBeNull();
     });
 
-    it('Extension Details for unknown Extension Point cannot be retrieved', async () => {
+    test('Extension Details for unknown Extension Point cannot be retrieved', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -169,13 +169,13 @@ describe('BasePluginManager test', () => {
         expect(Array.from(manager.getExtensions(EXTENSION_POINT_B_ID))).toHaveLength(0);
     });
 
-    it('Unknown extension cannot be instantiated', async () => {
+    test('Unknown extension cannot be instantiated', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         await expect(manager.instantiate('foo')).rejects.toThrow();
     });
 
-    it('Extension can be instantiated', async () => {
+    test('Extension can be instantiated', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
@@ -189,7 +189,7 @@ describe('BasePluginManager test', () => {
         extension.sayHello();
     });
 
-    it('Extension for unknown extension point is not registered', async () => {
+    test('Extension for unknown extension point is not registered', async () => {
         const manager = new BasePluginManager<string>(mockedRepository);
 
         manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
