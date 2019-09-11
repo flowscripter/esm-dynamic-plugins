@@ -87,6 +87,6 @@
     "dependencies": {
         "debug": "^4.1.1",
         "lodash": "4.17.15",
-        "nanoid": "2.1.0"
+        "nanoid": "2.1.1"
     }
 }
