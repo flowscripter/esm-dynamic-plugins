@@ -79,7 +79,7 @@
         "semantic-release": "15.13.24",
         "sonarqube-scanner": "2.5.0",
         "temp-dir": "2.0.0",
-        "ts-jest": "24.0.2",
+        "ts-jest": "24.1.0",
         "typedoc": "0.15.0",
         "typedoc-plugin-external-module-name": "2.1.0",
         "typescript": "3.6.3"
