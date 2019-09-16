@@ -48,8 +48,8 @@
         "docs": "npx typedoc --moduleResolution node src"
     },
     "devDependencies": {
-        "@commitlint/cli": "8.1.0",
-        "@commitlint/config-conventional": "8.1.0",
+        "@commitlint/cli": "8.2.0",
+        "@commitlint/config-conventional": "8.2.0",
         "@flowscripter/eslint-config": "1.3.7",
         "@flowscripter/renovate-config": "1.0.3",
         "@flowscripter/tsconfig": "1.2.0",
