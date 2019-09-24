@@ -88,52 +88,8 @@ The following diagram provides an overview of the main classes:
 
 ## Further Details
 
-#### Entry Points for Node and Browser
-
-The build config in `rollup.config.js` produces two bundled entry points:
- 
-* `node.js` is intended for consumption in node and exposed via the `main` property in `package.json`.
-* `browser.js` - is intended for consumption in a browser and exposed via the `browser` property in `package.json`.
-
-This ensures that dependencies for node specific modules can be shimmed via [rollup-plugin-node-builtins](https://github.com/calvinmetcalf/rollup-plugin-node-builtins)  
-
-#### No Legacy JavaScript Support
-
-Please note, that this project makes no attempt to support legacy Javascript versions or runtimes. 
-Browsers and NodeJS versions need to support:
-
-* https://github.com/tc39/proposal-dynamic-import
-* https://tc39.github.io/ecmascript-asyncawait/
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
-
-Because of this the project's exported module is configured so that:
- 
-* no transpiling is performed (apart from TypeScript to ES2015 JavaScript)
-* `package.json` specifies:
-    * `"main": "dist/index.js"`
-    * `"type": "module"`
-    * `"node": ">=10.15.1"` so that the `--experimental-modules` flag can be used
-
-#### Configuration
-
-Explanation of project configuration files:
-
-* `.editorconfig` - Configures [EditorConfig](https://editorconfig.org) compliant editors.
-* `.eslintrc.js` - TypeScript based [ESLint](https://eslint.org) configuration for the project derived from [@flowscripter/eslint-config](https://www.npmjs.com/package/@flowscripter/eslint-config).
-* `.gitignore` - Specifies files for git to [ignore](https://git-scm.com/docs/gitignore). 
-* `.huskyrc.js` - Provides git hooks using [Husky](https://github.com/typicode/husky) to enforce semantic commit messages and linting.   
-* `.travis.yml` - Defines the [Travis](https://travis-ci.com) build pipeline.
-* `commitlint.config.js` - Configures [commitlint](https://conventional-changelog.github.io/commitlint) to ensure commit messages can be used to drive automated [Semantic Version](https://semver.org) releases.
-* `package.js` - Defines development cycle scripts and configures publication of ES2015 modules. 
-* `release.config.js` - Configuration for automated semantic version releasing using [semantic-release](https://semantic-release.gitbook.io/semantic-release/)
-* `renovate.json` - Ensures automated dependency upgrade via [Renovate](https://renovatebot.com) with configuration derived from [@flowscripter/renovate-config](https://www.npmjs.com/package/@flowscripter/renovate-config)
-* `rollup.config.js` - Defines the TypeScript and ES2015 module build pipeline for [Rollup](https://rollupjs.org/guide/en)
-* `tsconfig.json` - [TypeScript](https://www.typescriptlang.org) configuration for the project derived from [@flowscripter/tsconfig](https://www.npmjs.com/package/@flowscripter/tsconfig)
-
-#### rollup-plugin-node-globals workaround
-
-Until [this PR](https://github.com/calvinmetcalf/rollup-plugin-node-globals/pull/15) is merged, the 
-`rollup-plugin-node-globals`dependency is sourced from https://github.com/vectronic/rollup-plugin-node-globals 
+Further details on project configuration files and Javascript version support can be found in 
+the [template for this project](https://github.com/flowscripter/ts-template/blob/master/README.md#overview).
 
 ## Alternatives
 
