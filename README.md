@@ -99,4 +99,4 @@ Does not support browser or ES2015 modules.
   
 ## License
 
-MIT © Vectronic
+MIT © Flowscripter
