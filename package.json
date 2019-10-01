@@ -84,7 +84,7 @@
         "typescript": "3.6.3"
     },
     "dependencies": {
-        "debug": "^4.1.1",
+        "debug": "4.1.1",
         "lodash": "4.17.15",
         "nanoid": "2.1.1"
     }
