@@ -117,7 +117,6 @@ export default class NodeModulesPluginRepository<EP_ID> extends AbstractPluginRe
         promises.push(promise);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private static async getPackageMetadata(candidatePath: string): Promise<{}> {
 
         const packageJsonPath = path.join(candidatePath, 'package.json');
