@@ -7,7 +7,7 @@ import ExtensionFactory from './ExtensionFactory';
 /**
  * Provides details of an Extension implementing an Extension Point.
  *
- * @typeparam EP_ID is the type of the Extension Point IDs used by the plugin manager instance.
+ * @typeparam EP_ID is the type of the Extension Point IDs used by the [[PluginManager]] instance.
  */
 export default interface ExtensionDescriptor<EP_ID> {
 
