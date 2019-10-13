@@ -63,7 +63,7 @@
         "eslint-plugin-import": "2.18.2",
         "eslint-plugin-jest": "22.19.0",
         "gulp": "4.0.2",
-        "husky": "3.0.8",
+        "husky": "3.0.9",
         "jest": "24.9.0",
         "rimraf": "3.0.0",
         "rollup": "1.23.1",
