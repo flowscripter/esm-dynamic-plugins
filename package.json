@@ -75,7 +75,7 @@
         "rollup-plugin-node-resolve": "5.2.0",
         "rollup-plugin-peer-deps-external": "2.2.0",
         "rollup-plugin-typescript2": "0.25.2",
-        "semantic-release": "15.13.30",
+        "semantic-release": "15.13.31",
         "sonarqube-scanner": "2.5.0",
         "temp-dir": "2.0.0",
         "ts-jest": "24.1.0",
