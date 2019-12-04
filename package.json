@@ -81,7 +81,7 @@
         "ts-jest": "24.2.0",
         "typedoc": "0.15.3",
         "typedoc-plugin-external-module-name": "2.1.0",
-        "typescript": "3.7.2"
+        "typescript": "3.7.3"
     },
     "dependencies": {
         "debug": "4.1.1",
