@@ -8,7 +8,7 @@ module.exports = {
         '**/?(*.)test.ts'
     ],
     transform: {
-        ts: 'ts-jest'
+        '\\.ts$': 'ts-jest'
     },
     modulePaths: [
         'src'
