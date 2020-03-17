@@ -28,8 +28,7 @@ jobs:
     addons:
       sonarcloud:
         organization: flowscripter
-        token:
-          secure: "$SONAR_TOKEN"
+        token: "$SONAR_TOKEN"
   - stage: build
     script: npm run build && npm run docs
     name: build
