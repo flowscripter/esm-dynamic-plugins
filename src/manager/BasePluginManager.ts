@@ -2,7 +2,7 @@
  * @module @flowscripter/esm-dynamic-plugins
  */
 import _ from 'lodash';
-import nanoid from 'nanoid';
+import { nanoid } from 'nanoid';
 
 import ExtensionPointRegistry from '../registry/ExtensionPointRegistry';
 import InMemoryExtensionPointRegistry from '../registry/InMemoryExtensionPointRegistry';
