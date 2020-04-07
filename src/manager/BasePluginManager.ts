@@ -37,7 +37,7 @@ export default class BasePluginManager<EP_ID> implements PluginManager<EP_ID> {
      * Constructor configures the instance using the optionally specified [[PluginRegistry]],
      * [[ExtensionPointRegistry]] and [[ExtensionRegistry]] instances.
      *
-     * @param pluginRepository optional [[PluginRepository]] implementation.
+     * @param pluginRepository a [[PluginRepository]] implementation.
      * @param pluginRegistry optional [[PluginRegistry]] implementation. Defaults to using [[InMemoryPluginRegistry]].
      * @param extensionPointRegistry optional [[ExtensionPointRegistry]] implementation. Defaults to using
      * [[InMemoryExtensionPointRegistry]].

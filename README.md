@@ -9,7 +9,7 @@
 
 ## Overview
 
-This project provides a Javascript framework for developing, deploying and installing plugins which may be dynamically
+This project provides a Javascript framework for defining plugins which may be dynamically
 discovered and imported into a running Javascript process.
 
 #### Key Features
