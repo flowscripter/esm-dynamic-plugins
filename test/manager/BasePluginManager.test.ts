@@ -7,8 +7,7 @@ import { EXTENSION_POINT_B_ID } from '../fixtures/ExtensionPointB';
 import NodeModulesPluginRepository from '../../src/repository/NodeModulesPluginRepository';
 
 jest.mock('../../src/repository/NodeModulesPluginRepository');
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mockedRepository: jest.Mocked<NodeModulesPluginRepository<string>> = new NodeModulesPluginRepository() as any;
+const mockedRepository = new NodeModulesPluginRepository() as jest.Mocked<NodeModulesPluginRepository<string>>;
 
 describe('BasePluginManager test', () => {
 

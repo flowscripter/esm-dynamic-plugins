@@ -152,7 +152,7 @@ export default class NodeModulesPluginRepository<EP_ID> extends AbstractPluginRe
     }
 
     protected async* pluginGenerator(moduleScope: string | undefined, moduleName: string | undefined,
-        extensionPointId: EP_ID | undefined): AsyncIterableIterator<[string, Plugin<EP_ID>]> {
+        extensionPointId: EP_ID | undefined): AsyncIterable<[string, Plugin<EP_ID>]> {
 
         for await (const candidatePath of this.filteredPathGenerator(moduleScope, moduleName)) {
             try {
