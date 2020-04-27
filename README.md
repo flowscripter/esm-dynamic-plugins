@@ -58,9 +58,9 @@ The following example projects are available which all support execution in Node
 * [JavaScript based host application](https://github.com/flowscripter/js-example-host-app)
 * [JavaScript based plugin](https://github.com/flowscripter/js-example-plugin)
 
-## API
+## Code Documentation
 
-[API documentation](https://flowscripter.github.io/esm-dynamic-plugins)
+[Typescript documentation](https://flowscripter.github.io/esm-dynamic-plugins)
 
 ## Development
 
