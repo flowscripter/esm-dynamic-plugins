@@ -71,7 +71,7 @@ export default class UrlPluginRepository<EP_ID> extends AbstractPluginRepository
     }
 
     protected async* pluginGenerator(moduleScope: string | undefined, moduleName: string | undefined,
-        extensionPointId: EP_ID | undefined): AsyncIterableIterator<[string, Plugin<EP_ID>]> {
+        extensionPointId: EP_ID | undefined): AsyncIterable<[string, Plugin<EP_ID>]> {
 
         for await (const candidateUrl of this.filteredUrlGenerator(moduleScope, moduleName)) {
             try {

@@ -16,7 +16,7 @@ import PluginRepository from './PluginRepository';
 export default abstract class AbstractPluginRepository<EP_ID> implements PluginRepository<string, EP_ID> {
 
     protected abstract pluginGenerator(moduleScope: string | undefined, moduleName: string | undefined,
-        extensionPointId: EP_ID | undefined): AsyncIterableIterator<[string, Plugin<EP_ID>]>;
+        extensionPointId: EP_ID | undefined): AsyncIterable<[string, Plugin<EP_ID>]>;
 
     /**
      * @inheritdoc
