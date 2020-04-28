@@ -34,6 +34,7 @@ export interface PluginLoadResult<EP_ID> {
  * Utility function to import a specified module and validate it is a [[Plugin]] implementation and
  * optionally that it provides an Extension for the specified Extension Point.
  *
+ * @param specifier the specifier for the module to import
  * @typeparam EP_ID is the type of the Extension Point IDs used by this plugin manager instance.
  */
 export default async function loadPlugin<EP_ID>(specifier: string, extensionPointId?: EP_ID):

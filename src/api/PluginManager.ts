@@ -68,6 +68,20 @@ export default interface PluginManager<EP_ID> {
     registerPluginsByModuleScope(moduleScope: string): Promise<number>;
 
     /**
+     * Scan for and register plugins with the specified matching module scope and Extension Point.
+     *
+     * Any existing registered plugins will be skipped.
+     *
+     * Any extensions provided by matching plugins which are for unregistered extension points will be skipped.
+     *
+     * @param moduleScope the scope by which to filter plugins
+     * @param extensionPointId the Extension Point ID for which to return Extensions
+     *
+     * @return a count of newly discovered and registered [[Plugin]] implementations
+     */
+    registerPluginsByModuleScopeAndExtensionPoint(moduleScope: string, extensionPointId: EP_ID): Promise<number>;
+
+    /**
      * Return all registered plugins.
      *
      * @return an iterable of registered [[Plugin]] implementations
