@@ -2,16 +2,33 @@ import fs, { Dirent, PathLike } from 'fs';
 import NodeModulesPluginRepository from '../../src/repository/NodeModulesPluginRepository';
 import { PluginLoadResult } from '../../src/repository/PluginLoader';
 import PluginA from '../fixtures/PluginA';
+import PluginB from '../fixtures/PluginB';
+import { EXTENSION_POINT_A_ID } from '../fixtures/ExtensionPointA';
 
 jest.mock('../../src/repository/PluginLoader', () => (
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     jest.fn().mockImplementation(async (specifier: string, extensionPointId?: unknown):
-    Promise<PluginLoadResult<unknown>> => ({
-        isValidPlugin: true,
-        isValidExtensionPoint: true,
-        instance: new PluginA()
-    }))
-));
+    Promise<PluginLoadResult<unknown>> => {
+        if (extensionPointId) {
+            if ((extensionPointId === EXTENSION_POINT_A_ID) && (specifier === 'root/@barscope/foo/')) {
+                return {
+                    isValidPlugin: true,
+                    isValidExtensionPoint: true,
+                    instance: new PluginA()
+                };
+            }
+            return {
+                isValidPlugin: true,
+                isValidExtensionPoint: false,
+                instance: new PluginB()
+            };
+        }
+        return {
+            isValidPlugin: true,
+            isValidExtensionPoint: true,
+            instance: new PluginA()
+        };
+    })));
 
 jest.mock('fs');
 const mockedFs = fs as jest.Mocked<typeof fs>;
@@ -171,5 +188,34 @@ describe('NodeModulesPluginRepository test', () => {
         expect(pluginIds).toHaveLength(1);
         expect(mockedFs.readdir).toBeCalledTimes(2);
         expect(mockedFs.readFile).toBeCalledTimes(1);
+    });
+
+    test('Get plugins by extension point works', async () => {
+        const repository = new NodeModulesPluginRepository<string>(['root']);
+
+        const pluginIds = [];
+
+        for await (const tuple of repository.getPluginsByExtensionPoint(EXTENSION_POINT_A_ID)) {
+            pluginIds.push(tuple[0]);
+        }
+
+        expect(pluginIds).toHaveLength(1);
+        expect(mockedFs.readdir).toBeCalledTimes(3);
+        expect(mockedFs.readFile).toBeCalledTimes(10);
+    });
+
+    test('Get plugins by module scope and extension point works', async () => {
+        const repository = new NodeModulesPluginRepository<string>(['root']);
+
+        const pluginIds = [];
+
+        for await (const tuple of repository.getPluginsByModuleScopeAndExtensionPoint('@barscope',
+            EXTENSION_POINT_A_ID)) {
+            pluginIds.push(tuple[0]);
+        }
+
+        expect(pluginIds).toHaveLength(1);
+        expect(mockedFs.readdir).toBeCalledTimes(2);
+        expect(mockedFs.readFile).toBeCalledTimes(4);
     });
 });
