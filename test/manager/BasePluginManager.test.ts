@@ -13,7 +13,7 @@ describe('BasePluginManager test', () => {
 
     beforeAll(() => {
 
-        mockedRepository.getPluginsByModuleName.mockImplementation((name: string) => {
+        mockedRepository.getPluginsByModuleName.mockImplementation((name: string, scope?: string) => {
             let i = 0;
             return {
                 [Symbol.asyncIterator]() {
@@ -21,6 +21,18 @@ describe('BasePluginManager test', () => {
                         next() {
                             if (i === 0) {
                                 i += 1;
+                                if (scope && scope !== 'foo') {
+                                    return Promise.resolve({
+                                        value: undefined as unknown as [string, Plugin<string>],
+                                        done: true
+                                    });
+                                }
+                                if (scope && name !== 'PluginA') {
+                                    return Promise.resolve({
+                                        value: undefined as unknown as [string, Plugin<string>],
+                                        done: true
+                                    });
+                                }
                                 return Promise.resolve({
                                     value: [
                                         name,
@@ -28,6 +40,98 @@ describe('BasePluginManager test', () => {
                                     ],
                                     done: false
                                 });
+                            }
+                            return Promise.resolve({
+                                value: undefined as unknown as [string, Plugin<string>],
+                                done: true
+                            });
+                        }
+                    };
+                }
+            };
+        });
+
+        mockedRepository.getPluginsByModuleScope.mockImplementation((scope: string) => {
+            let i = 0;
+            return {
+                [Symbol.asyncIterator]() {
+                    return {
+                        next() {
+                            if (i === 0) {
+                                i += 1;
+                                if (scope && scope === 'foo') {
+                                    return Promise.resolve({
+                                        value: [
+                                            'PluginA',
+                                            new PluginA()
+                                        ],
+                                        done: false
+                                    });
+                                }
+                            }
+                            return Promise.resolve({
+                                value: undefined as unknown as [string, Plugin<string>],
+                                done: true
+                            });
+                        }
+                    };
+                }
+            };
+        });
+
+        mockedRepository.getPluginsByExtensionPoint.mockImplementation((extensionPointId: string) => {
+            let i = 0;
+            return {
+                [Symbol.asyncIterator]() {
+                    return {
+                        next() {
+                            if (i === 0) {
+                                i += 1;
+                                if (extensionPointId === EXTENSION_POINT_A_ID) {
+                                    return Promise.resolve({
+                                        value: [
+                                            'PluginA',
+                                            new PluginA()
+                                        ],
+                                        done: false
+                                    });
+                                }
+                                return Promise.resolve({
+                                    value: [
+                                        'PluginB',
+                                        new PluginB()
+                                    ],
+                                    done: false
+                                });
+                            }
+                            return Promise.resolve({
+                                value: undefined as unknown as [string, Plugin<string>],
+                                done: true
+                            });
+                        }
+                    };
+                }
+            };
+        });
+
+        mockedRepository.getPluginsByModuleScopeAndExtensionPoint.mockImplementation((scope: string,
+            extensionPointId: string) => {
+            let i = 0;
+            return {
+                [Symbol.asyncIterator]() {
+                    return {
+                        next() {
+                            if (i === 0) {
+                                i += 1;
+                                if ((scope === 'foo') && (extensionPointId === EXTENSION_POINT_A_ID)) {
+                                    return Promise.resolve({
+                                        value: [
+                                            'PluginA',
+                                            new PluginA()
+                                        ],
+                                        done: false
+                                    });
+                                }
                             }
                             return Promise.resolve({
                                 value: undefined as unknown as [string, Plugin<string>],
@@ -109,6 +213,51 @@ describe('BasePluginManager test', () => {
         expect(await manager.registerPluginsByModuleName('PluginB')).toEqual(1);
         expect(Array.from(manager.getRegisteredPlugins())).toHaveLength(2);
         expect(mockedRepository.getPluginsByModuleName).toBeCalledTimes(2);
+    });
+
+    test('Plugins can be registered by scope', async () => {
+        const manager = new BasePluginManager<string>(mockedRepository);
+
+        manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
+        manager.registerExtensionPoint(EXTENSION_POINT_B_ID);
+
+        expect(await manager.registerPluginsByModuleScope('foo')).toEqual(1);
+        expect(Array.from(manager.getRegisteredPlugins())).toHaveLength(1);
+        expect(mockedRepository.getPluginsByModuleScope).toBeCalledTimes(1);
+    });
+
+    test('Plugins can be registered by scope and name', async () => {
+        const manager = new BasePluginManager<string>(mockedRepository);
+
+        manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
+        manager.registerExtensionPoint(EXTENSION_POINT_B_ID);
+
+        expect(await manager.registerPluginsByModuleName('PluginA', 'foo')).toEqual(1);
+        expect(Array.from(manager.getRegisteredPlugins())).toHaveLength(1);
+        expect(mockedRepository.getPluginsByModuleName).toBeCalledTimes(1);
+    });
+
+    test('Plugins can be registered by extension point', async () => {
+        const manager = new BasePluginManager<string>(mockedRepository);
+
+        manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
+        manager.registerExtensionPoint(EXTENSION_POINT_B_ID);
+
+        expect(await manager.registerPluginsByExtensionPoint(EXTENSION_POINT_B_ID)).toEqual(1);
+        expect(Array.from(manager.getRegisteredPlugins())).toHaveLength(1);
+        expect(mockedRepository.getPluginsByExtensionPoint).toBeCalledTimes(1);
+    });
+
+    test('Plugins can be registered by scope and extension point', async () => {
+        const manager = new BasePluginManager<string>(mockedRepository);
+
+        manager.registerExtensionPoint(EXTENSION_POINT_A_ID);
+        manager.registerExtensionPoint(EXTENSION_POINT_B_ID);
+
+        expect(await manager.registerPluginsByModuleScopeAndExtensionPoint('foo',
+            EXTENSION_POINT_A_ID)).toEqual(1);
+        expect(Array.from(manager.getRegisteredPlugins())).toHaveLength(1);
+        expect(mockedRepository.getPluginsByModuleScopeAndExtensionPoint).toBeCalledTimes(1);
     });
 
     test('Extension Details can be retrieved', async () => {

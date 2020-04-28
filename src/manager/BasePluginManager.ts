@@ -142,6 +142,18 @@ export default class BasePluginManager<EP_ID> implements PluginManager<EP_ID> {
         );
     }
 
+    /**
+     * @inheritdoc
+     */
+    public async registerPluginsByModuleScopeAndExtensionPoint(moduleScope: string, extensionPointId: EP_ID):
+        Promise<number> {
+        return this.consumeAsyncIterable(
+            this.makeDiscoveredPluginIterator(
+                this.pluginRepository.getPluginsByModuleScopeAndExtensionPoint(moduleScope, extensionPointId)
+            )
+        );
+    }
+
     // eslint-disable-next-line class-methods-use-this
     private* makeRegisteredPluginIterator(tuples: Iterable<[string, Plugin<EP_ID>]>):
     Iterable<Plugin<EP_ID>> {

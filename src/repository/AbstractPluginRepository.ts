@@ -45,4 +45,12 @@ export default abstract class AbstractPluginRepository<EP_ID> implements PluginR
     public getPluginsByModuleScope(moduleScope: string): AsyncIterable<[string, Plugin<EP_ID>]> {
         return this.pluginGenerator(moduleScope, undefined, undefined);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public getPluginsByModuleScopeAndExtensionPoint(moduleScope: string, extensionPointId: EP_ID):
+        AsyncIterable<[string, Plugin<EP_ID>]> {
+        return this.pluginGenerator(moduleScope, undefined, extensionPointId);
+    }
 }

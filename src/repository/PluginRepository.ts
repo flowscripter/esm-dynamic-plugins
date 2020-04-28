@@ -25,7 +25,8 @@ export default interface PluginRepository<P_ID, EP_ID> {
      * Returns plugins with the specified matching module name and optional scope.
      *
      * @param moduleName the name by which to filter plugins
-     * @param moduleScope the optional scope by which to filter plugins
+     * @param moduleScope the optional scope by which to filter plugins, this should be of the form `@myscope` e.g.
+     * `@foo`
      *
      * @return an async iterable of [P_ID, [[Plugin]]] tuples for all matching implementations
      */
@@ -34,11 +35,23 @@ export default interface PluginRepository<P_ID, EP_ID> {
     /**
      * Returns plugins with the specified matching module scope.
      *
-     * @param moduleScope the scope by which to filter plugins, this should be of the form `@myscope`
+     * @param moduleScope the scope by which to filter plugins, this should be of the form `@myscope` e.g. `@foo`
      *
      * @return an async iterable of [P_ID, [[Plugin]]] tuples for all matching implementations
      */
     getPluginsByModuleScope(moduleScope: string): AsyncIterable<[P_ID, Plugin<EP_ID>]>;
+
+    /**
+     * Returns plugins with the specified matching module scope which provide an Extension for the specified
+     * Extension Point.
+     *
+     * @param moduleScope the scope by which to filter plugins, this should be of the form `@myscope`
+     * @param extensionPointId the Extension Point ID for which to return Extensions
+     *
+     * @return an async iterable of [P_ID, [[Plugin]]] tuples for all matching implementations
+     */
+    getPluginsByModuleScopeAndExtensionPoint(moduleScope: string, extensionPointId: EP_ID):
+        AsyncIterable<[P_ID, Plugin<EP_ID>]>;
 
     /**
      * Return all plugins in the repository.
