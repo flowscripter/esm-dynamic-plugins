@@ -57,11 +57,11 @@
         "@types/jest": "25.2.1",
         "@types/lodash": "4.14.150",
         "@types/nanoid": "2.1.0",
-        "@typescript-eslint/eslint-plugin": "2.32.0",
-        "@typescript-eslint/parser": "2.32.0",
+        "@typescript-eslint/eslint-plugin": "2.33.0",
+        "@typescript-eslint/parser": "2.33.0",
         "eslint": "7.0.0",
         "eslint-plugin-import": "2.20.2",
-        "eslint-plugin-jest": "23.10.0",
+        "eslint-plugin-jest": "23.11.0",
         "gulp": "4.0.2",
         "husky": "4.2.5",
         "jest": "26.0.1",
@@ -81,7 +81,7 @@
         "ts-jest": "25.5.1",
         "typedoc": "0.17.6",
         "typedoc-plugin-external-module-name": "3.1.0",
-        "typescript": "3.8.3"
+        "typescript": "3.9.2"
     },
     "dependencies": {
         "debug": "4.1.1",
