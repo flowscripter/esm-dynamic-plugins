@@ -10,7 +10,7 @@ export default interface ExtensionInfo {
     /**
      * Opaque handle provided by a [[PluginManager]] to reference an Extension
      */
-    readonly extensionHandle: {};
+    readonly extensionHandle: unknown;
 
     /**
      * Optional data provided by the [[ExtensionDescriptor]] associated with the Extension

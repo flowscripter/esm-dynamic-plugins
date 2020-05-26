@@ -102,9 +102,10 @@ export default class BasePluginManager<EP_ID> implements PluginManager<EP_ID> {
     // eslint-disable-next-line class-methods-use-this
     private async consumeAsyncIterable(iterable: AsyncIterable<Plugin<EP_ID>>): Promise<number> {
         let i = 0;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         for await (const item of iterable) {
-            i += 1;
+            if (item) {
+                i += 1;
+            }
         }
         return i;
     }
@@ -192,7 +193,7 @@ export default class BasePluginManager<EP_ID> implements PluginManager<EP_ID> {
      * @throws *Error* if the specified Extension Handle is unknown
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public async instantiate(extensionHandle: {}, hostData?: any): Promise<any> {
+    public async instantiate(extensionHandle: unknown, hostData?: unknown): Promise<any> {
         if (!_.isString(extensionHandle)) {
             throw new Error(`Extension Handle ${extensionHandle} is not a string value`);
         }

@@ -107,5 +107,5 @@ export default interface PluginManager<EP_ID> {
      * @return an Extension instance
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    instantiate(extensionHandle: {}, hostData?: any): Promise<any>;
+    instantiate(extensionHandle: unknown, hostData?: unknown): Promise<any>;
 }
