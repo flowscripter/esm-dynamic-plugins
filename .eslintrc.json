@@ -1,0 +1,3 @@
+{
+    "extends": "@flowscripter/eslint-config"
+}

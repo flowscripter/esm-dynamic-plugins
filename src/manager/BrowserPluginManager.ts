@@ -5,7 +5,6 @@
 import BasePluginManager from './BasePluginManager';
 import UrlPluginRepository from '../repository/UrlPluginRepository';
 
-
 /**
  * Implementation of a [[PluginManager]] for a browser runtime.
  *

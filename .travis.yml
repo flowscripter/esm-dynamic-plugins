@@ -1,5 +1,5 @@
 language: node_js
-node_js: '12.11.1'
+node_js: '14.4.0'
 branches:
   only:
   - master
@@ -23,7 +23,7 @@ jobs:
   - script: npm run lint
     name: lint
   - stage: analysis
-    script: npm test -- --maxWorkers=4 --coverage && npm run lint -- -f json -o reports/eslint.json && npx gulp sonar
+    script: npm test -- --maxWorkers=4 --coverage && npm run lint -- -f json -o reports/eslint.json && npx gulp -f gulpfile.cjs sonar
     name: sonar
     addons:
       sonarcloud:
