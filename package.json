@@ -61,7 +61,7 @@
         "@typescript-eslint/parser": "3.7.0",
         "eslint": "7.5.0",
         "eslint-plugin-import": "2.22.0",
-        "eslint-plugin-jest": "23.18.0",
+        "eslint-plugin-jest": "23.18.1",
         "gulp": "4.0.2",
         "husky": "4.2.5",
         "jest": "26.1.0",
